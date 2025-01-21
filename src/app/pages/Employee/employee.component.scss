@@ -1,7 +1,12 @@
-h1 {
-  color: blue;
+.employee {
+  &__header {
+    margin-bottom: 20px;
+  }
 }
 
-p {
-  font-size: 16px;
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 500px;
 }
