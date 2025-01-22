@@ -5,11 +5,12 @@ import { FormsModule, FormGroup, FormControl, Validators, ReactiveFormsModule} f
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
+
+import { LayoutComponent } from '../../layout/layout.component';
 
 @Component({
   selector: 'app-employee',
-  imports: [FormsModule, ReactiveFormsModule, CommonModule, MatInputModule, MatFormFieldModule, MatButtonModule, MatCardModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, LayoutComponent, MatInputModule, MatFormFieldModule, MatButtonModule],
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.scss'],
   standalone: true,
