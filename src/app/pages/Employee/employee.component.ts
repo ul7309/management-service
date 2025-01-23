@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, FormGroup, FormControl, Validators, ReactiveFormsModule} from '@angular/forms';
 
@@ -8,6 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { LayoutComponent } from '../../layout/layout.component';
 
+import { Employee, FormField } from './employee.interface';
+import { EmployeeService } from './employee.service';
+
 @Component({
   selector: 'app-employee',
   imports: [FormsModule, ReactiveFormsModule, CommonModule, LayoutComponent, MatInputModule, MatFormFieldModule, MatButtonModule],
@@ -16,10 +19,11 @@ import { LayoutComponent } from '../../layout/layout.component';
   standalone: true,
 })
 
-export class EmployeeComponent {
+export class EmployeeComponent implements OnInit {
   myForm: FormGroup;
+  employee: Employee = {} as Employee;
 
-  fields = [
+  fields: FormField[] = [
     { key: 'fio', label: 'ФИО', validators: [Validators.required] },
     { key: 'department', label: 'Отдел', validators: [Validators.required] },
     { key: 'mainInformation', label: 'Главная информация', validators: [Validators.required] },
@@ -32,7 +36,7 @@ export class EmployeeComponent {
     { key: 'supervisor', label: 'Руководитель', validators: [Validators.required] },
   ];
 
-  constructor() {
+  constructor(private employeeService: EmployeeService) {
     this.myForm = new FormGroup({});
 
     this.fields.forEach(field => {
@@ -40,9 +44,25 @@ export class EmployeeComponent {
     });
   }
 
+  ngOnInit(): void {
+    this.employeeService.getEmployee(1).subscribe((data: Employee) => {
+      this.employee = data;
+      this.populateForm(data);
+    });
+  }
+
   hasError(controlName: string): boolean {
     const control = this.myForm.controls[controlName];
     return control.invalid && control.touched;
+  }
+
+  populateForm(employee: Employee): void {
+    Object.keys(this.myForm.controls).forEach(key => {
+        const employeeKey = key as keyof Employee; 
+        if (employee[employeeKey] !== undefined) {
+          this.myForm.controls[key].setValue(employee[employeeKey]);
+        }
+    });
   }
 
   submit() {
