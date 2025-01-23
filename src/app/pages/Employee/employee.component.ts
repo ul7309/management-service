@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { LayoutComponent } from '../../layout/layout.component';
 
 import { Employee, FormField } from './employee.interface';
-import { EmployeeService } from './employee.service';
+import { EmployeesService } from '../../services/employees.service';
 
 @Component({
   selector: 'app-employee',
@@ -36,7 +36,7 @@ export class EmployeeComponent implements OnInit {
     { key: 'supervisor', label: 'Руководитель', validators: [Validators.required] },
   ];
 
-  constructor(private employeeService: EmployeeService) {
+  constructor(private employeesService: EmployeesService) {
     this.myForm = new FormGroup({});
 
     this.fields.forEach(field => {
@@ -45,7 +45,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.employeeService.getEmployee(1).subscribe((data: Employee) => {
+    this.employeesService.getEmployee(1).subscribe((data: Employee) => {
       this.employee = data;
       this.populateForm(data);
     });

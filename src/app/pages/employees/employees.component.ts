@@ -7,7 +7,7 @@ import { MatListModule } from '@angular/material/list';
 import { LayoutComponent } from '../../layout/layout.component';
 
 import { Employee } from '../employee/employee.interface';
-import { EmployeesService } from './employees.service';
+import { EmployeesService } from '../../services/employees.service';
 
 @Component({
   selector: 'app-employees',
