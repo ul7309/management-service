@@ -6,8 +6,8 @@ import { MatListModule } from '@angular/material/list';
 
 import { LayoutComponent } from '../../layout/layout.component';
 
-import { Employee } from './employees.interface';
-import { EmployeeService } from './employees.service';
+import { Employee } from '../employee/employee.interface';
+import { EmployeesService } from './employees.service';
 
 @Component({
   selector: 'app-employees',
@@ -19,11 +19,11 @@ import { EmployeeService } from './employees.service';
 export class EmployeesComponent implements OnInit {
   employees: Employee[] = [];
 
-     constructor(private employeeService: EmployeeService) {}
+  constructor(private employeesService: EmployeesService) {}
 
-     ngOnInit(): void {
-       this.employeeService.getEmployees().subscribe((data) => {
-         this.employees = data;
-       });
-     }
+  ngOnInit(): void {
+    this.employeesService.getEmployees().subscribe((data) => {
+      this.employees = data;
+    });
+  }
 }
