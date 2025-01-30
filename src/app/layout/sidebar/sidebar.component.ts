@@ -20,5 +20,9 @@ export class SidebarComponent {
       link: '/employees',
       title: 'Сотрудники',
     },
+    {
+      link: '/departaments',
+      title: 'Отделы',
+    },
   ];
 }
