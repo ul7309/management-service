@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 import { Employee } from '../pages/employee/employee.interface';
 
@@ -9,21 +10,23 @@ import { Employee } from '../pages/employee/employee.interface';
 })
 
 export class EmployeesService {
-  private baseUrl = 'http://localhost:3000/employees';
+  private employeesUrl: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.employeesUrl = `${environment.apiUrl}/employees`;
+  }
 
   /**
    * Получение всех сотрудников
    */
   getEmployees(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(this.baseUrl);
+    return this.http.get<Employee[]>(this.employeesUrl);
   }
 
   /**
    * Получение сотрудника по ID
    */
   getEmployee(id: number): Observable<Employee> {
-    return this.http.get<Employee>(`${this.baseUrl}/${id}`);
+    return this.http.get<Employee>(`${this.employeesUrl}/${id}`);
   }
 }
