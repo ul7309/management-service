@@ -1,3 +1,20 @@
+@use '@angular/material' as mat;
+
+:host {
+  @include mat.toolbar-overrides((
+    container-background-color: var(--mat-sys-neutral-variant20),
+    container-text-color: var(--mat-sys-on-primary),
+  ));
+}
+
+.header {
+  margin-bottom: 20px;
+
+  &__auth {
+    margin-left: auto;
+  }
+}
+
 .page-content {
   min-height: 200px;
 }
