@@ -1,7 +1,7 @@
 <app-layout title="Список отделов">
   <mat-list role="list">
     <mat-list-item *ngFor="let departament of departaments" role="listitem">
-      <a [routerLink]="['/employees', departament.id]">{{ departament.name }}</a>
+      <a [routerLink]="['/departament', departament.id]">{{ departament.name }}</a>
     </mat-list-item>
   </mat-list>
 </app-layout>
