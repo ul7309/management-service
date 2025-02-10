@@ -14,6 +14,12 @@ export interface Employee {
   supervisor: string;
 }
 
+export interface SimpleEmployee {
+  id: string;
+  fio: string;
+  department: string;
+}
+
 export interface FormField {
   key: string;
   label: string;
