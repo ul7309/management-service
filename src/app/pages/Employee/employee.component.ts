@@ -22,6 +22,7 @@ import { EmployeesService } from '../../services/employees.service';
 export class EmployeeComponent implements OnInit {
   myForm: FormGroup;
   employee: Employee = {} as Employee;
+  isEditForm = false;
 
   fields: FormField[] = [
     { key: 'fio', label: 'ФИО', validators: [Validators.required] },

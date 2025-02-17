@@ -2,12 +2,15 @@
   <form [formGroup]="myForm" novalidate (ngSubmit)="submit()" class="form">
     <mat-form-field appearance="fill" *ngFor="let field of fields">
       <mat-label>{{field.label}}</mat-label>
-      <input matInput [formControlName]="field.key" [placeholder]="field.label" />
+      <input matInput [formControlName]="field.key" [placeholder]="field.label" [readonly]='!isEditForm' />
       <mat-error *ngIf="hasError(field.key)">
         Поле обязательно для заполнения
       </mat-error>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" [disabled]="myForm.invalid">Сохранить</button>
+    <div>
+      <button *ngIf="isEditForm" mat-raised-button color="primary" [disabled]="myForm.invalid" (click)="isEditForm = false">Сохранить</button>
+      <button *ngIf="!isEditForm" mat-raised-button color="primary" [disabled]="myForm.invalid" (click)="isEditForm = true">Изменить</button>
+    </div>
   </form>
 </app-layout>
