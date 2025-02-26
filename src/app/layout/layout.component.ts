@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MatCardModule } from '@angular/material/card';
+import { PanelModule } from 'primeng/panel';
 
 @Component({
   selector: 'app-layout',
-  imports: [CommonModule, MatCardModule],
+  imports: [CommonModule, PanelModule],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'
 })

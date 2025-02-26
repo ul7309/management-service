@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, FormGroup, FormControl, Validators, ReactiveFormsModule} from '@angular/forms';
 
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { FloatLabel } from 'primeng/floatlabel';
+import { ButtonModule } from 'primeng/button';
 
 import { LayoutComponent } from '../../layout/layout.component';
 
@@ -13,7 +13,7 @@ import { EmployeesService } from '../../services/employees.service';
 
 @Component({
   selector: 'app-employee',
-  imports: [FormsModule, ReactiveFormsModule, CommonModule, LayoutComponent, MatInputModule, MatFormFieldModule, MatButtonModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, LayoutComponent, InputTextModule, FloatLabel, ButtonModule],
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.scss'],
   standalone: true,
@@ -25,7 +25,7 @@ export class EmployeeComponent implements OnInit {
   isEditForm = false;
 
   fields: FormField[] = [
-    { key: 'fio', label: 'ФИО', validators: [Validators.required] },
+    { key: 'label', label: 'ФИО', validators: [Validators.required] },
     { key: 'department', label: 'Отдел', validators: [Validators.required] },
     { key: 'mainInformation', label: 'Главная информация', validators: [Validators.required] },
     { key: 'education', label: 'Образование', validators: [Validators.required] },
@@ -43,6 +43,8 @@ export class EmployeeComponent implements OnInit {
     this.fields.forEach(field => {
       this.myForm.addControl(field.key, new FormControl('', field.validators));
     });
+
+    this.myForm.disable();
   }
 
   ngOnInit(): void {

@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
-import { LayoutComponent } from '../../layout/layout.component';
-import { MatListModule } from '@angular/material/list';
+import { Menu } from 'primeng/menu';
 
+import { LayoutComponent } from '../../layout/layout.component';
 import { Departaments } from '../departaments/departaments.interface';
 import { DepartamentsService } from '../../services/departaments.service';
 
 @Component({
   selector: 'app-departament',
-  imports: [CommonModule, RouterLink, LayoutComponent, MatListModule],
+  imports: [CommonModule, RouterLink, LayoutComponent, Menu],
   templateUrl: './departaments.component.html',
   styleUrl: './departaments.component.scss'
 })

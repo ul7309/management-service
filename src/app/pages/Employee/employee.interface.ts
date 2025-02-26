@@ -2,7 +2,7 @@ import { Validators} from '@angular/forms';
 
 export interface Employee {
   id: string;
-  fio: string;
+  label: string;
   department: string;
   mainInformation: string;
   education: string;
@@ -16,7 +16,7 @@ export interface Employee {
 
 export interface SimpleEmployee {
   id: string;
-  fio: string;
+  label: string;
   department: string;
 }
 

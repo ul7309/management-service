@@ -1,7 +1,9 @@
 <app-layout title="Список сотрудников">
-  <mat-list role="list">
-    <mat-list-item *ngFor="let employee of employees" role="listitem">
-      <a [routerLink]="['/employee', employee.id]">{{ employee.fio }}</a>
-    </mat-list-item>
-  </mat-list>
+  <p-menu [model]="employees">
+    <ng-template #item let-item>
+      <a [routerLink]="['/employee', item.id]" class="p-menu-item-link">
+        <span class="ml-2">{{ item.label }}</span>
+      </a>
+    </ng-template>
+  </p-menu>
 </app-layout>

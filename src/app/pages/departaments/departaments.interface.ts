@@ -2,12 +2,12 @@ import { SimpleEmployee } from '../employee/employee.interface';
 
 export interface Item {
   id: string;
-  name: string;
+  label: string;
 }
 
 export interface Departaments {
   id: string;
-  name: string;
+  label: string;
   items: Item[];
 }
 

@@ -2,27 +2,27 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
-import { MatListModule } from '@angular/material/list';
+import { MenuModule } from 'primeng/menu';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [CommonModule, RouterLink, MatListModule],
+  imports: [CommonModule, RouterLink, MenuModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
   navigationMenuList = [
     {
-      link: '',
-      title: 'Главная',
+      route: '',
+      label: 'Главная',
     },
     {
-      link: '/employees',
-      title: 'Сотрудники',
+      route: '/employees',
+      label: 'Сотрудники',
     },
     {
-      link: '/departaments',
-      title: 'Отделы',
+      route: '/departaments',
+      label: 'Отделы',
     },
   ];
 }

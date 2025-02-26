@@ -1,15 +1,18 @@
-<mat-toolbar class="header">
-  <img src="/logo.svg" alt="Система ведения сотрудников">
-  <span>Система ведения сотрудников</span>
-  <button mat-raised-button class="header__auth">Войти</button>
-</mat-toolbar>
+<p-toolbar>
+  <ng-template #start>
+    <img src="/logo.svg" alt="Система ведения сотрудников">
+    <span>Система ведения сотрудников</span>
+  </ng-template>
 
-<mat-drawer-container class="page-content">
-  <mat-drawer mode="side" opened>
-    <app-sidebar />
-  </mat-drawer>
+  <ng-template #end>
+    <p-button severity="contrast">Войти</p-button>
+  </ng-template>
+</p-toolbar>
 
-  <mat-drawer-content>
+<div class="page-container">
+  <app-sidebar />
+
+  <div class="page-content">
     <router-outlet />
-  </mat-drawer-content>
-</mat-drawer-container>
+  </div>
+</div>
