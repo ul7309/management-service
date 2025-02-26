@@ -5,8 +5,8 @@
       </p-floatlabel>
 
     <div>
-      <p-button *ngIf="isEditForm" [disabled]="myForm.invalid" (click)="isEditForm = false">Сохранить</p-button>
-      <p-button *ngIf="!isEditForm" [disabled]="myForm.invalid" (click)="isEditForm = true">Изменить</p-button>
+      <p-button *ngIf="myForm.enabled" (click)="change()">Сохранить</p-button>
+      <p-button *ngIf="myForm.disabled" (click)="change()">Изменить</p-button>
     </div>
   </form>
 </app-layout>

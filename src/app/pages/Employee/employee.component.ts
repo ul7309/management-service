@@ -68,6 +68,10 @@ export class EmployeeComponent implements OnInit {
     });
   }
 
+  change() {
+    this.myForm[this.myForm.enabled ? 'disable' : 'enable']();
+  }
+
   submit() {
     console.log(this.myForm);
   }
