@@ -1,0 +1,13 @@
+<form [formGroup]="myForm" novalidate (ngSubmit)="submit()">
+  <div class="grid grid-cols-2 gap-4">
+    <p-floatlabel variant="on" *ngFor="let field of fields">
+      <input id="on_label" pInputText pSize="large" fluid [formControlName]="field.key" [ngClass]="{'ng-invalid': hasError(field.key)}" />
+      <label for="on_label">{{ field.label }}</label>
+    </p-floatlabel>
+  </div>
+
+  <div class="mt-4">
+    <p-button *ngIf="myForm.enabled" (click)="change()">Сохранить</p-button>
+    <p-button *ngIf="myForm.disabled" (click)="change()">Изменить</p-button>
+  </div>
+</form>
