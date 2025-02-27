@@ -1,9 +1,10 @@
 <app-layout title="Список отделов">
-  <p-menu [model]="departaments">
+  <p-menu *ngIf="departaments.length > 0; else elseBlock" [model]="departaments">
     <ng-template #item let-item>
       <a [routerLink]="['/departament', item.id]" class="p-menu-item-link">
         <span class="ml-2">{{ item.label }}</span>
       </a>
     </ng-template>
   </p-menu>
+  <ng-template #elseBlock>Ничего не найдено.</ng-template>
 </app-layout>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 import { Menu } from 'primeng/menu';
+import { ButtonModule } from 'primeng/button';
 
 import { LayoutComponent } from '../../layout/layout.component';
 import { Employee } from '../employee/employee.interface';
@@ -10,7 +11,7 @@ import { EmployeesService } from '../../services/employees.service';
 
 @Component({
   selector: 'app-employees',
-  imports: [CommonModule, RouterLink, Menu, LayoutComponent],
+  imports: [CommonModule, RouterLink, Menu, ButtonModule, LayoutComponent],
   templateUrl: './employees.component.html',
   styleUrl: './employees.component.scss'
 })
