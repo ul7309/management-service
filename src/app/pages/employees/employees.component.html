@@ -1,5 +1,5 @@
 <app-layout title="Список сотрудников">
-  <div class="flex">
+  <div class="flex items-start">
     <p-menu *ngIf="employees.length > 0; else elseBlock" [model]="employees">
       <ng-template #item let-item>
         <a [routerLink]="['/employee', item.id]" class="p-menu-item-link">
@@ -9,6 +9,8 @@
     </p-menu>
     <ng-template #elseBlock>Ничего не найдено.</ng-template>
 
-    <p-button class="ml-auto">Добавить сотрудника</p-button>
+    <a routerLink="/employee/add" class="p-button ml-auto">
+      Добавить сотрудника
+    </a>
   </div>
 </app-layout>

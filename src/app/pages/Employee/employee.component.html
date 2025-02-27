@@ -1,14 +1,3 @@
 <app-layout title="Карточка сотрудника">
-  <form [formGroup]="myForm" novalidate (ngSubmit)="submit()">
-    <div class="grid grid-cols-2 gap-4">
-      <p-floatlabel variant="on" *ngFor="let field of fields">
-        <input type="text" pInputText pSize="large" fluid [formControlName]="field.key" [ngClass]="{'ng-invalid': hasError(field.key)}" />
-      </p-floatlabel>
-    </div>
-
-    <div>
-      <p-button *ngIf="myForm.enabled" (click)="change()">Сохранить</p-button>
-      <p-button *ngIf="myForm.disabled" (click)="change()">Изменить</p-button>
-    </div>
-  </form>
+  <app-employee-form *ngIf="hasEmployee()" [employee]="employee"/>
 </app-layout>
