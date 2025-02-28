@@ -12,16 +12,23 @@ export interface Employee {
   specialization: string;
   coverLetter: string;
   supervisor: string;
-}
+};
 
 export interface SimpleEmployee {
   id: string;
   label: string;
   department: string;
-}
+};
 
 export interface FormField {
   key: string;
   label: string;
   validators: Validators;
-}
+  required: boolean;
+};
+
+export enum FormMode {
+  Create = 'create',
+  Edit = 'edit',
+  View = 'view'
+};

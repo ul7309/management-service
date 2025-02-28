@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { LayoutComponent } from '../../layout/layout.component';
 import { EmployeeFormComponent } from '../../components/employee-form/employee-form.component';
 
-import { Employee } from './employee.interface';
+import { Employee, FormMode } from './employee.interface';
 import { EmployeesService } from '../../services/employees.service';
 
 @Component({
@@ -16,6 +16,7 @@ import { EmployeesService } from '../../services/employees.service';
 })
 
 export class EmployeeComponent implements OnInit {
+  formMode: FormMode = FormMode.View;
   employee: Employee = {} as Employee;
 
   constructor(private employeesService: EmployeesService) {
@@ -25,6 +26,10 @@ export class EmployeeComponent implements OnInit {
     this.employeesService.getEmployee(1).subscribe((data: Employee) => {
       this.employee = data;
     });
+  }
+
+  onModeChange(newMode: FormMode) {
+    this.formMode = newMode;
   }
 
   hasEmployee(): boolean {
