@@ -1,10 +1,16 @@
 <app-layout title="Список отделов">
-  <p-menu *ngIf="departaments.length > 0; else elseBlock" [model]="departaments">
-    <ng-template #item let-item>
-      <a [routerLink]="['/departament', item.id]" class="p-menu-item-link">
-        <span class="ml-2">{{ item.label }}</span>
-      </a>
-    </ng-template>
-  </p-menu>
-  <ng-template #elseBlock>Ничего не найдено.</ng-template>
+  <div class="flex items-start">
+    <p-menu *ngIf="departaments.length > 0; else elseBlock" [model]="departaments">
+      <ng-template #item let-item>
+        <a [routerLink]="['/departament', item.id]" class="p-menu-item-link">
+          <span class="ml-2">{{ item.label }}</span>
+        </a>
+      </ng-template>
+    </p-menu>
+    <ng-template #elseBlock>Ничего не найдено.</ng-template>
+
+    <a routerLink="/departament/add" class="p-button ml-auto">
+      Добавить отдел
+    </a>
+  </div>
 </app-layout>
