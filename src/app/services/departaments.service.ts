@@ -26,7 +26,7 @@ export class DepartamentsService {
   /**
    * Получение отдела по ID
    */
-  getDepartament(id: number): Observable<Departament[]> {
-    return this.http.get<Departament[]>(`${this.departaments}/${id}`);
+  getDepartament(id: number): Observable<Departament> {
+    return this.http.get<Departament>(`${this.departaments}/${id}`);
   }
 }

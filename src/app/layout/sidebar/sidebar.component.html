@@ -1,7 +1,7 @@
 <p-menu [model]="navigationMenuList">
   <ng-template #item let-item>
     <a [routerLink]="item.route" class="p-menu-item-link">
-      <span class="ml-2">{{ item.label }}</span>
+      {{ item.label }}
     </a>
   </ng-template>
 </p-menu>

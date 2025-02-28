@@ -1,1 +1,17 @@
-<p>departament works!</p>
+<app-layout [title]="title()">
+  <p-button
+    *ngIf="departament.supervisor"
+    [routerLink]="['/employee', departament.supervisor.id]"
+    [label]="departament.supervisor.label"
+    [link]="true"
+  />
+
+  <p-menu *ngIf="departament.employess; else elseBlock" [model]="departament.employess">
+    <ng-template #item let-item>
+      <a [routerLink]="['/employee', item.id]" class="p-menu-item-link">
+        {{ item.label }}
+      </a>
+    </ng-template>
+  </p-menu>
+  <ng-template #elseBlock>Ничего не найдено.</ng-template>
+</app-layout>

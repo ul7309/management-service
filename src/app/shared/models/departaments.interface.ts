@@ -13,7 +13,8 @@ export interface Departaments {
 
 export interface Departament {
   id: string;
-  supervisor: string;
   parent: string;
-  employee: SimpleEmployee;
+  label: string;
+  supervisor: SimpleEmployee;
+  employess: SimpleEmployee[];
 }

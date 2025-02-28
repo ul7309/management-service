@@ -3,7 +3,7 @@ import { Validators} from '@angular/forms';
 export interface Employee {
   id: string;
   label: string;
-  department: string;
+  departmentId: string;
   mainInformation: string;
   education: string;
   grade: string;
@@ -17,7 +17,7 @@ export interface Employee {
 export interface SimpleEmployee {
   id: string;
   label: string;
-  department: string;
+  departmentId: string;
 };
 
 export interface FormField {
