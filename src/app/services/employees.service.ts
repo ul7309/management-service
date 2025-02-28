@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
-import { Employee } from '../pages/employee/employee.interface';
+import { Employee } from '../shared/models/employee.interface';
 
 @Injectable({
   providedIn: 'root',

@@ -1,4 +1,4 @@
-import { SimpleEmployee } from '../employee/employee.interface';
+import { SimpleEmployee } from './employee.interface';
 
 export interface Item {
   id: string;

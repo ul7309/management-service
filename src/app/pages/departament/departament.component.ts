@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Departament } from '../departaments/departaments.interface';
+import { Departament } from '../../shared/models/departaments.interface';
 import { DepartamentsService } from '../../services/departaments.service';
 
 @Component({

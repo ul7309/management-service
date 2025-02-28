@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { Departaments, Departament } from '../pages/departaments/departaments.interface';
+import { Departaments, Departament } from '../shared/models/departaments.interface';
 import { environment } from '../../environments/environment';
 
 @Injectable({
