@@ -1,3 +1,12 @@
-<app-layout title="Добавить сотрудника">
-  Добавить отдел
+<app-layout title="Добавить отдел">
+  <form [formGroup]="departamentForm" novalidate (ngSubmit)="submit()">
+    <div>
+      <label for="departament">Отдел</label>
+      <input id="departament" pInputText pSize="large" fluid formControlName="departament" />
+    </div>
+  
+    <div class="mt-4">
+      <p-button [disabled]="departamentForm.invalid" (click)="submit()">Добавить</p-button>
+    </div>
+  </form>
 </app-layout>
