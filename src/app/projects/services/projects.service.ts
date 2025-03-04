@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { Project } from '../models/projects.interface';
+import { Project, SimpleProject } from '../models/projects.interface';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -24,9 +24,9 @@ export class ProjectsService {
   }
 
   /**
-   * Получение сотрудника по ID
+   * Получение проекта по ID
    */
-  // getEmployee(id: number): Observable<Employee> {
-  //   return this.http.get<Employee>(`${this.employees}/${id}`);
-  // }
+  getProject(id: number): Observable<SimpleProject> {
+    return this.http.get<SimpleProject>(`${this.projects}/${id}`);
+  }
 }
