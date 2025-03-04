@@ -24,5 +24,9 @@ export class SidebarComponent {
       route: '/departaments',
       label: 'Отделы',
     },
+    {
+      route: '/projects',
+      label: 'Проекты',
+    },
   ];
 }

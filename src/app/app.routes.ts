@@ -1,9 +1,12 @@
 import { Routes } from '@angular/router';
-import employeesRoutes from '../app/employees/employees.routes';
-import departamentsRoutes from '../app/departaments/departaments.routes';
+
+import employees from '../app/employees/employees.routes';
+import departaments from '../app/departaments/departaments.routes';
+import projects from '../app/projects/projects.routes';
 
 
 export const routes: Routes = [
-  ...employeesRoutes,
-  ...departamentsRoutes,
+  ...employees,
+  ...departaments,
+  ...projects,
 ];
