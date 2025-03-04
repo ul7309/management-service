@@ -4,7 +4,7 @@ import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 
-import { LayoutComponent } from '../../layout/layout.component';
+import { LayoutComponent } from '../../../layout/layout.component';
 
 @Component({
   selector: 'app-add-departament',

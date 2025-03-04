@@ -5,9 +5,9 @@ import { RouterLink } from '@angular/router';
 import { Menu } from 'primeng/menu';
 import { ButtonModule } from 'primeng/button';
 
-import { LayoutComponent } from '../../layout/layout.component';
+import { LayoutComponent } from '../../../layout/layout.component';
 
-import { Departament } from '../../shared/models/departaments.interface';
+import { Departament } from '../../models/departaments.interface';
 import { DepartamentsService } from '../../services/departaments.service';
 
 @Component({

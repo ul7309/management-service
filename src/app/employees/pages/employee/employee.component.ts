@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LayoutComponent } from '../../layout/layout.component';
+import { LayoutComponent } from '../../../layout/layout.component';
 import { EmployeeFormComponent } from '../../components/employee-form/employee-form.component';
 
-import { Employee, FormMode } from '../../shared/models/employee.interface';
+import { Employee, FormMode } from '../../models/employee.interface';
 import { EmployeesService } from '../../services/employees.service';
 
 @Component({

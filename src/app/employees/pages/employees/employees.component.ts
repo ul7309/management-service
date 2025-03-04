@@ -5,8 +5,8 @@ import { RouterLink } from '@angular/router';
 import { Menu } from 'primeng/menu';
 import { ButtonModule } from 'primeng/button';
 
-import { LayoutComponent } from '../../layout/layout.component';
-import { Employee } from '../../shared/models/employee.interface';
+import { LayoutComponent } from '../../../layout/layout.component';
+import { Employee } from '../../models/employee.interface';
 import { EmployeesService } from '../../services/employees.service';
 
 @Component({

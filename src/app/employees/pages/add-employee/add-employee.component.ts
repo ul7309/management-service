@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
-import { FormMode } from '../../shared/models/employee.interface';
+import { FormMode } from '../../models/employee.interface';
 
-import { LayoutComponent } from '../../layout/layout.component';
+import { LayoutComponent } from '../../../layout/layout.component';
 import { EmployeeFormComponent } from '../../components/employee-form/employee-form.component';
 
 @Component({

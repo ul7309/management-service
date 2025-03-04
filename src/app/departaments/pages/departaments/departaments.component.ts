@@ -4,8 +4,8 @@ import { RouterLink } from '@angular/router';
 
 import { Menu } from 'primeng/menu';
 
-import { LayoutComponent } from '../../layout/layout.component';
-import { Departaments } from '../../shared/models/departaments.interface';
+import { LayoutComponent } from '../../../layout/layout.component';
+import { Departaments } from '../../models/departaments.interface';
 import { DepartamentsService } from '../../services/departaments.service';
 
 @Component({

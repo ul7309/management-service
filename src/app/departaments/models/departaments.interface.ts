@@ -1,4 +1,4 @@
-import { SimpleEmployee } from './employee.interface';
+import { SimpleEmployee } from '../../employees/models/employee.interface';
 
 export interface Departaments {
   id: string;
