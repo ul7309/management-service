@@ -1,15 +1,15 @@
-import { SimpleEmployee } from '../../employees/models/employee.interface';
+import { Employee } from '../../employees/models/employee.interface';
 
-export interface Departaments {
-  id: string;
-  label: string;
-  items: Departaments[];
-}
+export type DepartamentEmployee = Pick<Employee, 'id' | 'label' | 'departmentId'>
 
 export interface Departament {
   id: string;
-  parent: string;
   label: string;
-  supervisor: SimpleEmployee;
-  employess: SimpleEmployee[];
+  parent: string;
+  supervisor: DepartamentEmployee;
+  employess: DepartamentEmployee[];
+}
+
+export interface Departaments extends Pick<Departament, 'id' | 'label'> {
+  items: Departaments[];
 }

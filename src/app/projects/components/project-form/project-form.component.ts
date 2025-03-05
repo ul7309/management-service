@@ -5,7 +5,7 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angula
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 
-import { SimpleProject, FormField, FormMode } from '../../models/projects.interface';
+import { Project, FormField, FormMode } from '../../models/projects.interface';
 
 @Component({
   selector: 'app-project-form',
@@ -15,7 +15,7 @@ import { SimpleProject, FormField, FormMode } from '../../models/projects.interf
 })
 
 export class ProjectFormComponent implements OnInit, OnChanges {
-  @Input() project: SimpleProject = {} as SimpleProject;
+  @Input() project: Project = {} as Project;
   @Input() mode: FormMode = FormMode.Create;
   @Output() modeChange = new EventEmitter<FormMode>();
 
@@ -44,7 +44,7 @@ export class ProjectFormComponent implements OnInit, OnChanges {
     this.populateForm(this.project);
 
     this.form.valueChanges.subscribe(values => {
-      const updatedProject: SimpleProject = { ...this.project, ...values };
+      const updatedProject: Project = { ...this.project, ...values };
       this.project = updatedProject;
     });
   }
@@ -62,9 +62,9 @@ export class ProjectFormComponent implements OnInit, OnChanges {
     return this.mode === FormMode.Edit || this.mode === FormMode.Create
   }
 
-  populateForm(project: SimpleProject): void {
+  populateForm(project: Project): void {
     Object.keys(this.form.controls).forEach(key => {
-        const projectKey = key as keyof SimpleProject; 
+        const projectKey = key as keyof Project; 
         if (project[projectKey] !== undefined) this.form.controls[key].setValue(project[projectKey]);
     });
   }

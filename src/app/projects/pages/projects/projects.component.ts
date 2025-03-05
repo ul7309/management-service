@@ -8,7 +8,7 @@ import { ButtonModule } from 'primeng/button';
 import { LayoutComponent } from '../../../layout/layout.component';
 
 import { ProjectsService } from '../../services/projects.service';
-import { Project } from '../../models/projects.interface';
+import { Projects } from '../../models/projects.interface';
 
 @Component({
   selector: 'app-projects',
@@ -18,7 +18,7 @@ import { Project } from '../../models/projects.interface';
 })
 
 export class ProjectsComponent implements OnInit {
-  projects: Project[] = [];
+  projects: Projects[] = [];
 
   constructor(private projectsService: ProjectsService) {}
 

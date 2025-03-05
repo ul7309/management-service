@@ -1,11 +1,8 @@
-import { Validators} from '@angular/forms';
+import { Validators } from '@angular/forms';
 
 export interface Project {
   id: string;
   label: string;
-};
-
-export interface SimpleProject extends Project {
   label_nda: string;
   description: string;
   direction: string;
@@ -13,6 +10,8 @@ export interface SimpleProject extends Project {
   functionality: string;
   сustomer: string;
 };
+
+export type Projects = Pick<Project, 'id' | 'label'>
 
 /* TODO перенести на общий уровень */
 export interface FormField {

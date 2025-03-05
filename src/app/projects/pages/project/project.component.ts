@@ -5,7 +5,7 @@ import { LayoutComponent } from '../../../layout/layout.component';
 import { ProjectFormComponent } from '../../components/project-form/project-form.component';
 
 import { ProjectsService } from '../../services/projects.service';
-import { SimpleProject, FormMode } from '../../models/projects.interface';
+import { Project, FormMode } from '../../models/projects.interface';
 
 @Component({
   selector: 'app-project',
@@ -16,13 +16,13 @@ import { SimpleProject, FormMode } from '../../models/projects.interface';
 
 export class ProjectComponent implements OnInit {
   formMode: FormMode = FormMode.View;
-  project: SimpleProject = {} as SimpleProject;
+  project: Project = {} as Project;
 
   constructor(private projectsService: ProjectsService) {
   }
 
   ngOnInit(): void {
-    this.projectsService.getProject(1).subscribe((data: SimpleProject) => {
+    this.projectsService.getProject(1).subscribe((data: Project) => {
       this.project = data;
     });
   }

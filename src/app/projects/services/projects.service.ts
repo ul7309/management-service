@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
-import { Project, SimpleProject } from '../models/projects.interface';
+import { Projects, Project } from '../models/projects.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -19,14 +19,14 @@ export class ProjectsService {
   /**
    * Получение всех проектов
    */
-  getProjects(): Observable<Project[]> {
-    return this.http.get<Project[]>(this.projects);
+  getProjects(): Observable<Projects[]> {
+    return this.http.get<Projects[]>(this.projects);
   }
 
   /**
    * Получение проекта по ID
    */
-  getProject(id: number): Observable<SimpleProject> {
-    return this.http.get<SimpleProject>(`${this.projects}/${id}`);
+  getProject(id: number): Observable<Project> {
+    return this.http.get<Project>(`${this.projects}/${id}`);
   }
 }
