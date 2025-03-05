@@ -35,8 +35,4 @@ export class EmployeeComponent implements OnInit {
   hasEmployee(): boolean {
     return Object.keys(this.employee).length > 0
   }
-
-  submit() {
-    console.log('submit');
-  }
 }

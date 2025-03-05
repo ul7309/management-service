@@ -1,6 +1,8 @@
 <app-layout title="Карточка проекта">
   <app-project-form
+    *ngIf="hasProjects()"
     [project]="project"
     [mode]="formMode"
+    (modeChange)="onModeChange($event)"
   />
 </app-layout>
