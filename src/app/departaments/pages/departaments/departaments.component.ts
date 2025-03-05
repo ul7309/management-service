@@ -5,8 +5,9 @@ import { RouterLink } from '@angular/router';
 import { Menu } from 'primeng/menu';
 
 import { LayoutComponent } from '../../../layout/layout.component';
-import { Departaments } from '../../models/departaments.interface';
+
 import { DepartamentsService } from '../../services/departaments.service';
+import { Departaments } from '../../models/departaments.interface';
 
 @Component({
   selector: 'app-departament',

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { Departaments, Departament } from '../models/departaments.interface';
 import { environment } from '../../../environments/environment';
+import { Departaments, Departament } from '../models/departaments.interface';
 
 @Injectable({
   providedIn: 'root',

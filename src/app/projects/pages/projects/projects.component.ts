@@ -6,8 +6,9 @@ import { Menu } from 'primeng/menu';
 import { ButtonModule } from 'primeng/button';
 
 import { LayoutComponent } from '../../../layout/layout.component';
-import { Project } from '../../models/projects.interface';
+
 import { ProjectsService } from '../../services/projects.service';
+import { Project } from '../../models/projects.interface';
 
 @Component({
   selector: 'app-projects',

@@ -6,8 +6,9 @@ import { Menu } from 'primeng/menu';
 import { ButtonModule } from 'primeng/button';
 
 import { LayoutComponent } from '../../../layout/layout.component';
-import { Employee } from '../../models/employee.interface';
+
 import { EmployeesService } from '../../services/employees.service';
+import { Employee } from '../../models/employee.interface';
 
 @Component({
   selector: 'app-employees',

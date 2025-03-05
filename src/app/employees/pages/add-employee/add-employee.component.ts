@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
-import { FormMode } from '../../models/employee.interface';
-
 import { LayoutComponent } from '../../../layout/layout.component';
 import { EmployeeFormComponent } from '../../components/employee-form/employee-form.component';
+
+import { FormMode } from '../../models/employee.interface';
 
 @Component({
   selector: 'app-add-employee',

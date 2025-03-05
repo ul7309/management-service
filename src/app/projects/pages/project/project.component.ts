@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { LayoutComponent } from '../../../layout/layout.component';
 import { ProjectFormComponent } from '../../components/project-form/project-form.component';
 
-import { SimpleProject, FormMode } from '../../models/projects.interface';
 import { ProjectsService } from '../../services/projects.service';
+import { SimpleProject, FormMode } from '../../models/projects.interface';
 
 @Component({
   selector: 'app-project',

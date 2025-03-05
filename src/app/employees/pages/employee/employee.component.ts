@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { LayoutComponent } from '../../../layout/layout.component';
 import { EmployeeFormComponent } from '../../components/employee-form/employee-form.component';
 
-import { Employee, FormMode } from '../../models/employee.interface';
 import { EmployeesService } from '../../services/employees.service';
+import { Employee, FormMode } from '../../models/employee.interface';
 
 @Component({
   selector: 'app-employee',

@@ -7,8 +7,8 @@ import { ButtonModule } from 'primeng/button';
 
 import { LayoutComponent } from '../../../layout/layout.component';
 
-import { Departament } from '../../models/departaments.interface';
 import { DepartamentsService } from '../../services/departaments.service';
+import { Departament } from '../../models/departaments.interface';
 
 @Component({
   selector: 'app-departament',
