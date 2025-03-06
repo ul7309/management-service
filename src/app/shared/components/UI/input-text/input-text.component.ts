@@ -30,7 +30,6 @@ export class InputTextComponent implements ControlValueAccessor, OnInit, OnDestr
   @Input() label!: string;
   @Input() error!: boolean;
   @Input() required!: boolean;
-  @Input() disabled!: boolean;
 
   formControl = new FormControl('');
   onChange: (value: string) => void = () => {

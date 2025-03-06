@@ -6,7 +6,6 @@
       [label]="field.label"
       [required]="field.required"
       [error]="hasError(field.key)"
-      [disabled]="myForm.get(field.key)?.disabled || false"
       formControlName="{{field.key}}"
     />
   </div>

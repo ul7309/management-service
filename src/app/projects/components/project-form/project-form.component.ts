@@ -2,14 +2,14 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges, Output, EventEmitte
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 
-import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { InputTextComponent } from '../../../shared/components/UI/input-text/input-text.component';
 
 import { Project, FormField, FormMode } from '../../models/projects.interface';
 
 @Component({
   selector: 'app-project-form',
-  imports: [ReactiveFormsModule, CommonModule, InputTextModule, ButtonModule],
+  imports: [ReactiveFormsModule, CommonModule, InputTextComponent, ButtonModule],
   templateUrl: './project-form.component.html',
   styleUrl: './project-form.component.scss'
 })
@@ -36,7 +36,8 @@ export class ProjectFormComponent implements OnInit, OnChanges {
     this.form = new FormGroup({});
 
     this.fields.forEach(field => {
-      this.form.addControl(field.key, new FormControl('', field.validators));
+      const isDisabled = this.mode === FormMode.View;
+      this.form.addControl(field.key, new FormControl({value: '', disabled: isDisabled}, field.validators));
     });
   }
 

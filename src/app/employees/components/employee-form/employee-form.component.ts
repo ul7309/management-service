@@ -39,7 +39,8 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     this.myForm = new FormGroup({});
 
     this.fields.forEach(field => {
-      this.myForm.addControl(field.key, new FormControl('', field.validators));
+      const isDisabled = this.mode === FormMode.View;
+      this.myForm.addControl(field.key, new FormControl({value: '', disabled: isDisabled}, field.validators));
     });
   }
 
