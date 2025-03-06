@@ -1,0 +1,13 @@
+<div>
+  <label [for]="key">{{ label }} <span *ngIf="required" class="text-red-600">*</span></label>
+  <input
+    [id]="key"
+    pInputText
+    pSize="large"
+    fluid
+    [formControl]="formControl"
+    [ngClass]="{ 'ng-invalid': error }"
+    [disabled]="disabled"
+    (blur)="onTouched()"
+  />
+</div>

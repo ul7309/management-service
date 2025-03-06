@@ -1,9 +1,14 @@
 <form [formGroup]="myForm" novalidate (ngSubmit)="submit()">
   <div class="grid grid-cols-2 gap-4">
-    <div *ngFor="let field of fields">
-      <label [for]="field.key">{{ field.label }} <span *ngIf="field.required" class="text-red-600">*</span></label>
-      <input [id]="field.key" pInputText pSize="large" fluid [formControlName]="field.key" [ngClass]="{'ng-invalid': hasError(field.key)}" />
-    </div>
+    <app-input-text
+      *ngFor="let field of fields"
+      [key]="field.key"
+      [label]="field.label"
+      [required]="field.required"
+      [error]="hasError(field.key)"
+      [disabled]="myForm.get(field.key)?.disabled || false"
+      formControlName="{{field.key}}"
+    />
   </div>
 
   <div class="mt-4">

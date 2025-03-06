@@ -2,14 +2,14 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges, Output, EventEmitte
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 
-import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { InputTextComponent } from '../../../shared/components/UI/input-text/input-text.component';
 
 import { Employee, FormField, FormMode } from '../../models/employee.interface';
 
 @Component({
   selector: 'app-employee-form',
-  imports: [ReactiveFormsModule, CommonModule, InputTextModule, ButtonModule],
+  imports: [ReactiveFormsModule, CommonModule, ButtonModule, InputTextComponent],
   templateUrl: './employee-form.component.html',
   styleUrl: './employee-form.component.scss'
 })
