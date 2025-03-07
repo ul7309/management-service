@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LayoutComponent } from '../../../layout/layout.component';
+import { LayoutComponent } from '@layout/layout.component';
 import { ProjectFormComponent } from '../../components/project-form/project-form.component';
 
 import { ProjectsService } from '../../services/projects.service';
 import { Project } from '../../models/projects.interface';
-import { FormMode } from '../../../shared/models/form-mode.enum';
+import { FormMode } from '@shared/models/form-mode.enum';
 
 @Component({
   selector: 'app-project',

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
-import { LayoutComponent } from '../../../layout/layout.component';
+import { LayoutComponent } from '@layout/layout.component';
 import { ProjectFormComponent } from '../../components/project-form/project-form.component';
 
-import { FormMode } from '../../../shared/models/form-mode.enum';
+import { FormMode } from '@shared/models/form-mode.enum';
 
 @Component({
   selector: 'app-add-project',

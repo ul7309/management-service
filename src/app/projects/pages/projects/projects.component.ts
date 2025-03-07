@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
 import { Menu } from 'primeng/menu';
 import { ButtonModule } from 'primeng/button';
 
-import { LayoutComponent } from '../../../layout/layout.component';
+import { LayoutComponent } from '@layout/layout.component';
 
 import { ProjectsService } from '../../services/projects.service';
 import { Projects } from '../../models/projects.interface';

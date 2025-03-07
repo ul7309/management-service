@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 
 import { ButtonModule } from 'primeng/button';
-import { InputTextComponent } from '../../../shared/components/UI/input-text/input-text.component';
+import { InputTextComponent } from '@shared/components/UI/input-text/input-text.component';
 
 import { Employee } from '../../models/employee.interface';
-import { FormField } from '../../../shared/models/form-field.interface';
-import { FormMode } from '../../../shared/models/form-mode.enum';
+import { FormField } from '@shared/models/form-field.interface';
+import { FormMode } from '@shared/models/form-mode.enum';
 
 @Component({
   selector: 'app-employee-form',
