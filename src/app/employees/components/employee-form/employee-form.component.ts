@@ -5,7 +5,9 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angula
 import { ButtonModule } from 'primeng/button';
 import { InputTextComponent } from '../../../shared/components/UI/input-text/input-text.component';
 
-import { Employee, FormField, FormMode } from '../../models/employee.interface';
+import { Employee } from '../../models/employee.interface';
+import { FormField } from '../../../shared/models/form-field.interface';
+import { FormMode } from '../../../shared/models/form-mode.enum';
 
 @Component({
   selector: 'app-employee-form',

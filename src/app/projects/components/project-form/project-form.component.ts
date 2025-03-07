@@ -5,7 +5,9 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angula
 import { ButtonModule } from 'primeng/button';
 import { InputTextComponent } from '../../../shared/components/UI/input-text/input-text.component';
 
-import { Project, FormField, FormMode } from '../../models/projects.interface';
+import { Project } from '../../models/projects.interface';
+import { FormField } from '../../../shared/models/form-field.interface';
+import { FormMode } from '../../../shared/models/form-mode.enum';
 
 @Component({
   selector: 'app-project-form',

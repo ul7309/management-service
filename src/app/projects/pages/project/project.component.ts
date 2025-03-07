@@ -5,7 +5,8 @@ import { LayoutComponent } from '../../../layout/layout.component';
 import { ProjectFormComponent } from '../../components/project-form/project-form.component';
 
 import { ProjectsService } from '../../services/projects.service';
-import { Project, FormMode } from '../../models/projects.interface';
+import { Project } from '../../models/projects.interface';
+import { FormMode } from '../../../shared/models/form-mode.enum';
 
 @Component({
   selector: 'app-project',

@@ -1,5 +1,3 @@
-import { Validators} from '@angular/forms';
-
 export interface Employee {
   id: string;
   label: string;
@@ -12,17 +10,4 @@ export interface Employee {
   specialization: string;
   coverLetter: string;
   supervisor: string;
-};
-
-export interface FormField {
-  key: string;
-  label: string;
-  validators: Validators;
-  required: boolean;
-};
-
-export enum FormMode {
-  Create = 'create',
-  Edit = 'edit',
-  View = 'view'
 };

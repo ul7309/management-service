@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { LayoutComponent } from '../../../layout/layout.component';
 import { EmployeeFormComponent } from '../../components/employee-form/employee-form.component';
 
-import { FormMode } from '../../models/employee.interface';
+import { FormMode } from '../../../shared/models/form-mode.enum';
 
 @Component({
   selector: 'app-add-employee',

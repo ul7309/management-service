@@ -5,7 +5,8 @@ import { LayoutComponent } from '../../../layout/layout.component';
 import { EmployeeFormComponent } from '../../components/employee-form/employee-form.component';
 
 import { EmployeesService } from '../../services/employees.service';
-import { Employee, FormMode } from '../../models/employee.interface';
+import { Employee } from '../../models/employee.interface';
+import { FormMode } from '../../../shared/models/form-mode.enum';
 
 @Component({
   selector: 'app-employee',
