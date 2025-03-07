@@ -10,4 +10,5 @@ export interface Employee {
   specialization: string;
   coverLetter: string;
   supervisor: string;
+  project: string;
 };

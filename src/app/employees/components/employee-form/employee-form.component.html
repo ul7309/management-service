@@ -1,13 +1,23 @@
 <form [formGroup]="myForm" novalidate (ngSubmit)="submit()">
   <div class="grid grid-cols-2 gap-4">
-    <app-input-text
-      *ngFor="let field of fields"
-      [key]="field.key"
-      [label]="field.label"
-      [required]="field.required"
-      [error]="hasError(field.key)"
-      formControlName="{{field.key}}"
-    />
+    <div *ngFor="let field of fields">
+      <app-input-text
+        [key]="field.key"
+        [label]="field.label"
+        [required]="field.required"
+        [error]="hasError(field.key)"
+        formControlName="{{field.key}}"
+      />
+      <div *ngIf="field.key === 'project' && mode === FormMode.Edit" class="mt-4">
+        <p-select
+          formControlName="selectedProject"
+          [options]="projects"
+          optionLabel="label"
+          placeholder="Выбрать проект"
+          (onChange)="onProjectChange($event)"
+        />
+      </div>
+    </div>
   </div>
 
   <div class="mt-4">
