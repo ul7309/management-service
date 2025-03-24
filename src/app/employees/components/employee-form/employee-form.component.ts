@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 
 import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
 import { InputTextComponent } from '@shared/components/UI/input-text/input-text.component';
 import { ProjectFormComponent } from '../../../projects/components/project-form/project-form.component';
 
@@ -12,7 +13,7 @@ import { FormMode } from '@shared/models/form-mode.enum';
 
 @Component({
   selector: 'app-employee-form',
-  imports: [ReactiveFormsModule, CommonModule, ButtonModule, InputTextComponent, ProjectFormComponent],
+  imports: [ReactiveFormsModule, CommonModule, ButtonModule, DialogModule, InputTextComponent, ProjectFormComponent],
   templateUrl: './employee-form.component.html',
   styleUrl: './employee-form.component.scss'
 })
@@ -22,6 +23,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   @Input() mode: FormMode = FormMode.Create;
   @Output() modeChange = new EventEmitter<FormMode>();
 
+  visible = false;
   myForm: FormGroup;
   FormMode = FormMode;
   fields: FormField[] = [
@@ -99,5 +101,9 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   submit() {
     console.log('employee', this.employee);
     this.setMode(FormMode.View);
+  }
+
+  showDialog() {
+    this.visible = true;
   }
 }
