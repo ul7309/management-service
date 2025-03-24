@@ -5,7 +5,6 @@ import { LayoutComponent } from '@layout/layout.component';
 import { EmployeeFormComponent } from '../../components/employee-form/employee-form.component';
 
 import { EmployeesService } from '../../services/employees.service';
-import { ProjectsService } from '../../../projects/services/projects.service';
 import { Employee } from '../../models/employee.interface';
 import { Projects } from '../../../projects/models/projects.interface';
 import { FormMode } from '@shared/models/form-mode.enum';
@@ -23,19 +22,12 @@ export class EmployeeComponent implements OnInit {
   employee: Employee = {} as Employee;
   projects: Projects[] = [];
 
-  constructor(
-    private employeesService: EmployeesService,
-    private projectsService: ProjectsService
-  ) {
+  constructor(private employeesService: EmployeesService) {
   }
 
   ngOnInit(): void {
     this.employeesService.getEmployee(1).subscribe((data: Employee) => {
       this.employee = data;
-    });
-
-    this.projectsService.getProjects().subscribe((data) => {
-      this.projects = data;
     });
   }
 

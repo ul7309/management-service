@@ -3,24 +3,16 @@ import { CommonModule } from '@angular/common';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 
 import { ButtonModule } from 'primeng/button';
-import { Select } from 'primeng/select';
 import { InputTextComponent } from '@shared/components/UI/input-text/input-text.component';
+import { ProjectFormComponent } from '../../../projects/components/project-form/project-form.component';
 
-import { Projects } from '../../../projects/models/projects.interface';
 import { Employee } from '../../models/employee.interface';
 import { FormField } from '@shared/models/form-field.interface';
 import { FormMode } from '@shared/models/form-mode.enum';
 
-interface ProjectChangeEvent {
-  value: {
-    label: string;
-    id: string;
-  };
-}
-
 @Component({
   selector: 'app-employee-form',
-  imports: [ReactiveFormsModule, CommonModule, ButtonModule, Select, InputTextComponent],
+  imports: [ReactiveFormsModule, CommonModule, ButtonModule, InputTextComponent, ProjectFormComponent],
   templateUrl: './employee-form.component.html',
   styleUrl: './employee-form.component.scss'
 })
@@ -28,12 +20,10 @@ interface ProjectChangeEvent {
 export class EmployeeFormComponent implements OnInit, OnChanges {
   @Input() employee: Employee = {} as Employee;
   @Input() mode: FormMode = FormMode.Create;
-  @Input() projects: Projects[] = [];
   @Output() modeChange = new EventEmitter<FormMode>();
 
   myForm: FormGroup;
   FormMode = FormMode;
-
   fields: FormField[] = [
     { key: 'label', label: 'ФИО', validators: [Validators.required], required: true },
     { key: 'department', label: 'Отдел', validators: [Validators.required], required: true },
@@ -55,7 +45,6 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
       const isDisabled = this.mode === FormMode.View;
       this.myForm.addControl(field.key, new FormControl({value: '', disabled: isDisabled}, field.validators));
     });
-    this.myForm.addControl('selectedProject', new FormControl<Projects[]>([]));
   }
 
   ngOnInit(): void {
@@ -110,9 +99,5 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   submit() {
     console.log('employee', this.employee);
     this.setMode(FormMode.View);
-  }
-
-  onProjectChange(project: ProjectChangeEvent): void {
-    this.myForm.controls['project'].setValue(project.value.label);
   }
 }

@@ -8,13 +8,10 @@
         [error]="hasError(field.key)"
         formControlName="{{field.key}}"
       />
-      <div *ngIf="field.key === 'project' && mode === FormMode.Edit" class="mt-4">
-        <p-select
-          formControlName="selectedProject"
-          [options]="projects"
-          optionLabel="label"
-          placeholder="Выбрать проект"
-          (onChange)="onProjectChange($event)"
+      <div *ngIf="field.key === 'project' && mode === FormMode.Create" class="mt-4">
+        <app-project-form
+          [mode]="mode"
+          (modeChange)="change()"
         />
       </div>
     </div>
