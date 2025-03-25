@@ -10,23 +10,23 @@ import { Employee } from '../models/employee.interface';
 })
 
 export class EmployeesService {
-  private employees: string;
+  private employeesUrl: string;
 
   constructor(private http: HttpClient) {
-    this.employees = `${environment.apiUrl}/employees`;
+    this.employeesUrl = `${environment.apiUrl}/employees`;
   }
 
   /**
    * Получение всех сотрудников
    */
   getEmployees(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(this.employees);
+    return this.http.get<Employee[]>(this.employeesUrl);
   }
 
   /**
    * Получение сотрудника по ID
    */
   getEmployee(id: number): Observable<Employee> {
-    return this.http.get<Employee>(`${this.employees}/${id}`);
+    return this.http.get<Employee>(`${this.employeesUrl}/${id}`);
   }
 }

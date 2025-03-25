@@ -7,7 +7,7 @@ import { ButtonModule } from 'primeng/button';
 
 import { LayoutComponent } from '@layout/layout.component';
 
-import { EmployeesService } from '../../services/employees.service';
+import { EmployeesService } from '../../services/employees-data.service';
 import { Employee } from '../../models/employee.interface';
 
 @Component({

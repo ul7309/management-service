@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { LayoutComponent } from '@layout/layout.component';
 import { EmployeeFormComponent } from '../../components/employee-form/employee-form.component';
 
-import { EmployeesService } from '../../services/employees.service';
+import { EmployeesService } from '../../services/employees-data.service';
 import { Employee } from '../../models/employee.interface';
 import { Projects } from '../../../projects/models/projects.interface';
 import { FormMode } from '@shared/models/form-mode.enum';
