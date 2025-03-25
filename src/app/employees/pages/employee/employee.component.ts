@@ -26,7 +26,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.employeesService.getEmployee(1).subscribe((data: Employee) => {
+    this.employeesService.getEmployee('67e109e0001c644919c3').subscribe((data: Employee) => {
       this.employee = data;
     });
   }
