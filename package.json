@@ -23,6 +23,7 @@
     "@angular/router": "^19.1.0",
     "@primeng/themes": "^19.0.7",
     "@tailwindcss/postcss": "^4.0.9",
+    "appwrite": "^17.0.1",
     "postcss": "^8.5.3",
     "primeng": "^19.0.7",
     "rxjs": "~7.8.0",
@@ -46,5 +47,10 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.7.2",
     "typescript-eslint": "8.18.0"
+  },
+  "overrides": {
+    "@angular-devkit/build-angular": {
+      "tailwindcss": "^4.0.9"
+    }
   }
 }
