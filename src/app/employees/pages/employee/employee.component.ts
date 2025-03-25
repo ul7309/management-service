@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute} from "@angular/router";
 
 import { LayoutComponent } from '@layout/layout.component';
 import { EmployeeFormComponent } from '../../components/employee-form/employee-form.component';
@@ -22,11 +23,15 @@ export class EmployeeComponent implements OnInit {
   employee: Employee = {} as Employee;
   projects: Projects[] = [];
 
-  constructor(private employeesService: EmployeesService) {
+  constructor(
+    private employeesService: EmployeesService,
+    private activateRoute: ActivatedRoute
+  ) {
   }
 
   ngOnInit(): void {
-    this.employeesService.getEmployee('67e109e0001c644919c3').subscribe((data: Employee) => {
+    const employeeId = this.activateRoute.snapshot.params["id"];
+    this.employeesService.getEmployee(employeeId).subscribe((data: Employee) => {
       this.employee = data;
     });
   }

@@ -22,7 +22,7 @@
   </div>
 
   <div class="mt-4">
-    <p-button *ngIf="isVisibleSaveBtn()" [disabled]="myForm.invalid" (click)="submit()">Сохранить</p-button>
+    <p-button *ngIf="isVisibleSaveBtn()" [disabled]="myForm.invalid" (click)="submit()" [loading]="isLoading">Сохранить</p-button>
     <p-button *ngIf="mode === FormMode.View" (click)="change()">Изменить</p-button>
     <p-button *ngIf="mode === FormMode.Edit"severity="danger" class="ml-4">Удалить</p-button>
   </div>

@@ -21,14 +21,16 @@ import { FormMode } from '@shared/models/form-mode.enum';
 export class EmployeeFormComponent implements OnInit, OnChanges {
   @Input() employee: Employee = {} as Employee;
   @Input() mode: FormMode = FormMode.Create;
+  @Input() isLoading = false;
   @Output() modeChange = new EventEmitter<FormMode>();
+  @Output() formData = new EventEmitter<Employee>();
 
   visible = false;
   myForm: FormGroup;
   FormMode = FormMode;
   fields: FormField[] = [
     { key: 'label', label: 'ФИО', validators: [Validators.required], required: true },
-    { key: 'department', label: 'Отдел', validators: [Validators.required], required: true },
+    { key: 'departmentId', label: 'Отдел', validators: [Validators.required], required: true },
     { key: 'mainInformation', label: 'Главная информация', validators: [Validators.required], required: true },
     { key: 'education', label: 'Образование', validators: [Validators.required], required: true },
     { key: 'grade', label: 'Грейд', validators: [Validators.required], required: true },
@@ -37,7 +39,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     { key: 'specialization', label: 'Специализация', validators: [Validators.required], required: true },
     { key: 'coverLetter', label: 'Сопроводительное письмо', validators: [Validators.required], required: true },
     { key: 'supervisor', label: 'Руководитель', validators: [Validators.required], required: true },
-    { key: 'project', label: 'Проект', validators: [Validators.required], required: true },
+    //{ key: 'project', label: 'Проект', validators: [Validators.required], required: false },
   ];
 
   constructor() {
@@ -86,7 +88,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     }
   }
 
-  private setMode(newMode: FormMode) {
+  setMode(newMode: FormMode) {
     if (this.mode !== newMode) {
       this.mode = newMode;
       this.updateFormState();
@@ -99,8 +101,8 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   }
 
   submit() {
-    console.log('employee', this.employee);
     this.setMode(FormMode.View);
+    this.formData.emit(this.employee);
   }
 
   showDialog() {

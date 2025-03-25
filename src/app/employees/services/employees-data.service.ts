@@ -8,6 +8,7 @@ import { EmployeeAppwriteService } from './employees-appwrite.service';
 interface EmployeeDataService {
   getEmployees(): Observable<Employee[]>;
   getEmployee(id: string): Observable<Employee>;
+  createEmployee(id: Employee): Observable<Employee>;
 }
 
 @Injectable({
@@ -29,5 +30,12 @@ export class EmployeesService {
    */
   getEmployee(id: string): Observable<Employee> {
     return this.employeeDataService.getEmployee(id);
+  }
+
+  /**
+   * Создать сотрудника сотрудника
+   */
+  createEmployee(params: Employee): Observable<Employee> {
+    return this.employeeDataService.createEmployee(params);
   }
 }
