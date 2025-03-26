@@ -6,7 +6,7 @@ import { Menu } from 'primeng/menu';
 
 import { LayoutComponent } from '@layout/layout.component';
 
-import { DepartamentsService } from '../../services/departaments.service';
+import { DepartamentsService } from '../../services/departaments-data.service';
 import { Departaments } from '../../models/departaments.interface';
 
 @Component({
