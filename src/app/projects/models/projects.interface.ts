@@ -6,7 +6,7 @@ export interface Project {
   direction: string;
   goal: string;
   functionality: string;
-  сustomer: string;
+  customer: string;
 };
 
 export type Projects = Pick<Project, 'id' | 'label'>
