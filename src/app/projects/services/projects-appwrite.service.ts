@@ -1,33 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Models } from 'appwrite';
 
 import { Projects, Project } from '../models/projects.interface';
 
-import { Client, Account, Databases, Models } from 'appwrite';
-import { environment } from '@environment/environment';
-
-const PROJECT_ID = '67e107a8003a3e773a34';
-const DB_ID = '67e107fe00127303abd0';
-const COLLECTION_ID = '67e3e366002155b2ec44';
-
-const client = new Client()
-  .setEndpoint(environment.apiUrl)
-  .setProject(PROJECT_ID);
-
-export const account = new Account(client);
-const DB = new Databases(client);
-
-interface AppwriteListProjectsResponse {
-  total: number;
-  documents: Models.Document[]; 
-}
+import { AppwriteService } from '@shared/services/appwrite.service';
+import { AppwriteResponse } from '@shared/models/appwrite-response';
+import { APPWRITE_DB_ID, APPWRITE_PROJECTS_ID } from '@shared/constants';
 
 @Injectable({
   providedIn: 'root',
 })
 
 export class ProjectsAppwriteService {
+  constructor(private appwriteService: AppwriteService) { }
+
   mapDocumentToProject(doc: Models.Document): Project {
     return {
       id: doc['$id'],
@@ -42,16 +30,16 @@ export class ProjectsAppwriteService {
   }
 
   getProjects(): Observable<Projects[]> {
-    return from(DB.listDocuments(DB_ID, COLLECTION_ID))
+    return from(this.appwriteService.db.listDocuments(APPWRITE_DB_ID, APPWRITE_PROJECTS_ID))
       .pipe(
-        map((response: AppwriteListProjectsResponse) => {
+        map((response: AppwriteResponse) => {
           return response.documents.map(doc => this.mapDocumentToProject(doc));
         })
       );
   }
 
   getProject(projectId: string): Observable<Project> {
-      return from(DB.getDocument(DB_ID, COLLECTION_ID, projectId))
+      return from(this.appwriteService.db.getDocument(APPWRITE_DB_ID, APPWRITE_PROJECTS_ID, projectId))
         .pipe(
           map((doc: Models.Document) => this.mapDocumentToProject(doc)),
         );

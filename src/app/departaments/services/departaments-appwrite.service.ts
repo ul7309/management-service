@@ -1,33 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Models } from 'appwrite';
 
 import { Departaments } from '../models/departaments.interface';
 
-import { Client, Account, Databases, Models } from 'appwrite';
-import { environment } from '@environment/environment';
-
-const PROJECT_ID = '67e107a8003a3e773a34';
-const DB_ID = '67e107fe00127303abd0';
-const COLLECTION_ID = '67e2a0510013b969dd49';
-
-const client = new Client()
-  .setEndpoint(environment.apiUrl)
-  .setProject(PROJECT_ID);
-
-export const account = new Account(client);
-const DB = new Databases(client);
-
-interface AppwriteListDocumentsResponse {
-  total: number;
-  documents: Models.Document[]; 
-}
+import { AppwriteService } from '@shared/services/appwrite.service';
+import { AppwriteResponse } from '@shared/models/appwrite-response';
+import { APPWRITE_DB_ID, APPWRITE_DEPARTAMENTS_ID } from '@shared/constants';
 
 @Injectable({
   providedIn: 'root',
 })
 
 export class DepartamentsAppwriteService {
+  constructor(private appwriteService: AppwriteService) { }
+
   mapDocumentToDepartament(doc: Models.Document): Departaments {
     return {
       id: doc['$id'],
@@ -37,9 +25,9 @@ export class DepartamentsAppwriteService {
   }
 
   getDepartaments(): Observable<Departaments[]> {
-    return from(DB.listDocuments(DB_ID, COLLECTION_ID))
+    return from(this.appwriteService.db.listDocuments(APPWRITE_DB_ID, APPWRITE_DEPARTAMENTS_ID))
       .pipe(
-        map((response: AppwriteListDocumentsResponse) => {
+        map((response: AppwriteResponse) => {
           return response.documents.map(doc => this.mapDocumentToDepartament(doc));
         })
       );
