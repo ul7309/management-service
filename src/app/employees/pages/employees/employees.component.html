@@ -1,13 +1,20 @@
 <app-layout title="Список сотрудников">
   <div class="flex items-start">
-    <p-menu *ngIf="employees.length > 0; else elseBlock" [model]="employees">
-      <ng-template #item let-item>
-        <a [routerLink]="['/employee', item.id]" class="p-menu-item-link">
-          {{ item.label }}
-        </a>
-      </ng-template>
-    </p-menu>
-    <ng-template #elseBlock>Ничего не найдено.</ng-template>
+    <div *ngIf="isLoading; else employeesList">
+      <p-progressSpinner />
+    </div>
+
+    <ng-template #employeesList>
+      <p-menu *ngIf="employees.length > 0; else elseBlock" [model]="employees">
+        <ng-template #item let-item>
+          <a [routerLink]="['/employee', item.id]" class="p-menu-item-link">
+            {{ item.label }}
+          </a>
+        </ng-template>
+      </p-menu>
+
+      <ng-template #elseBlock>Ничего не найдено.</ng-template>
+    </ng-template>
 
     <a routerLink="/employee/add" class="p-button ml-auto">
       Добавить сотрудника

@@ -1,4 +1,8 @@
 <app-layout title="Карточка сотрудника">
+  <div *ngIf="isLoading">
+    <p-progressSpinner />
+  </div>
+
   <app-employee-form
     *ngIf="hasEmployee()"
     [employee]="employee"

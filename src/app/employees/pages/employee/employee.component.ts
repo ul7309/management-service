@@ -4,15 +4,15 @@ import { ActivatedRoute } from "@angular/router";
 
 import { LayoutComponent } from '@layout/layout.component';
 import { EmployeeFormComponent } from '../../components/employee-form/employee-form.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { EmployeesService } from '../../services/employees-data.service';
 import { Employee } from '../../models/employee.interface';
-import { Projects } from '../../../projects/models/projects.interface';
 import { FormMode } from '@shared/models/form-mode.enum';
 
 @Component({
   selector: 'app-employee',
-  imports: [CommonModule, LayoutComponent, EmployeeFormComponent],
+  imports: [CommonModule, LayoutComponent, EmployeeFormComponent, ProgressSpinnerModule],
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.scss'],
   standalone: true,
@@ -21,7 +21,7 @@ import { FormMode } from '@shared/models/form-mode.enum';
 export class EmployeeComponent implements OnInit {
   formMode: FormMode = FormMode.View;
   employee: Employee = {} as Employee;
-  projects: Projects[] = [];
+  isLoading = false;
 
   constructor(
     private employeesService: EmployeesService,
@@ -30,9 +30,11 @@ export class EmployeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     const employeeId = this.activateRoute.snapshot.params["id"];
     this.employeesService.getEmployee(employeeId).subscribe((data: Employee) => {
       this.employee = data;
+      this.isLoading = false;
     });
   }
 
@@ -41,6 +43,6 @@ export class EmployeeComponent implements OnInit {
   }
 
   hasEmployee(): boolean {
-    return Object.keys(this.employee).length > 0
+    return !this.isLoading && Object.keys(this.employee).length > 0;
   }
 }
