@@ -20,6 +20,7 @@ export class ProjectFormComponent implements OnInit, OnChanges {
   @Input() project: Project = {} as Project;
   @Input() mode: FormMode = FormMode.Create;
   @Output() modeChange = new EventEmitter<FormMode>();
+  @Output() formData = new EventEmitter<Project>();
 
   form: FormGroup;
   FormMode = FormMode;
@@ -31,7 +32,7 @@ export class ProjectFormComponent implements OnInit, OnChanges {
     { key: 'direction', label: 'Сфера', validators: [Validators.required], required: true },
     { key: 'goal', label: 'Цель проекта', validators: [Validators.required], required: true },
     { key: 'functionality', label: 'Функциональность', validators: [Validators.required], required: true },
-    { key: 'сustomer', label: 'Заказчик', validators: [Validators.required], required: true },
+    { key: 'customer', label: 'Заказчик', validators: [Validators.required], required: true },
   ];
 
   constructor() {
@@ -93,7 +94,7 @@ export class ProjectFormComponent implements OnInit, OnChanges {
   }
 
   submit() {
-    console.log('project', this.project);
     this.setMode(FormMode.View);
+    this.formData.emit(this.project);
   }
 }

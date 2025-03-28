@@ -8,6 +8,7 @@ import { ProjectsAppwriteService } from './projects-appwrite.service';
 interface ProjectsDataService {
   getProjects(): Observable<Projects[]>;
   getProject(id: string): Observable<Project>;
+  createProject(params: Project): Observable<Project>;
 }
 
 @Injectable({
@@ -29,5 +30,12 @@ export class ProjectsService {
    */
   getProject(id: string): Observable<Project> {
     return this.projectsDataService.getProject(id);
+  }
+
+  /**
+   * Создать проект
+   */
+  createProject(params: Project): Observable<Project> {
+    return this.projectsDataService.createProject(params);
   }
 }
