@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { LayoutComponent } from '@layout/layout.component';
 import { ProjectFormComponent } from '../../components/project-form/project-form.component';
@@ -18,13 +19,16 @@ export class AddProjectComponent {
   formMode: FormMode = FormMode.Create;
   isLoading = false;
 
-  constructor(private projectsService: ProjectsService) {}
+  constructor(
+    private projectsService: ProjectsService,
+    private router: Router
+  ) {}
 
   create(project: Project): void {
       this.isLoading = true;
       this.projectsService.createProject(project).subscribe({
         next: () => {
-          // Успешное создание
+          this.router.navigate(['/projects']);
         },
         complete: () => {
           this.isLoading = false;

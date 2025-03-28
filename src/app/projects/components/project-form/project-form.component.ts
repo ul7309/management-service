@@ -20,10 +20,9 @@ export class ProjectFormComponent implements OnInit, OnChanges {
   @Input() project: Project = {} as Project;
   @Input() mode: FormMode = FormMode.Create;
   @Output() modeChange = new EventEmitter<FormMode>();
-  @Output() formData = new EventEmitter<Project>();
+  @Output() emitSubmit = new EventEmitter<Project>();
 
   form: FormGroup;
-  FormMode = FormMode;
 
   fields: FormField[] = [
     { key: 'label', label: 'Название проекта', validators: [Validators.required], required: true },
@@ -66,6 +65,14 @@ export class ProjectFormComponent implements OnInit, OnChanges {
     return this.mode === FormMode.Edit || this.mode === FormMode.Create
   }
 
+  isViewMode(): boolean {
+    return this.mode === FormMode.View;
+  }
+
+  isEditMode(): boolean {
+    return this.mode === FormMode.Edit;
+  }
+
   populateForm(project: Project): void {
     Object.keys(this.form.controls).forEach(key => {
         const projectKey = key as keyof Project; 
@@ -81,20 +88,16 @@ export class ProjectFormComponent implements OnInit, OnChanges {
     }
   }
 
-  private setMode(newMode: FormMode) {
-    if (this.mode !== newMode) {
-      this.mode = newMode;
-      this.updateFormState();
-      this.modeChange.emit(this.mode);
-    }
+  changeMode(mode: FormMode) {
+    this.modeChange.emit(mode);
   }
 
   change() {
-    this.setMode(FormMode.Edit);
+    this.changeMode(FormMode.Edit);
   }
 
-  submit() {
-    this.setMode(FormMode.View);
-    this.formData.emit(this.project);
+  onSubmitHandler() {
+    this.changeMode(FormMode.View);
+    this.emitSubmit.emit(this.project);
   }
 }

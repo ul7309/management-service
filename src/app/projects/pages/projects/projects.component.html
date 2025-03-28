@@ -1,13 +1,20 @@
 <app-layout title="Список проектов">
   <div class="flex items-start">
-    <p-menu *ngIf="projects.length > 0; else elseBlock" [model]="projects">
-      <ng-template #item let-item>
-        <a [routerLink]="['/project', item.id]" class="p-menu-item-link">
-          {{ item.label }}
-        </a>
-      </ng-template>
-    </p-menu>
-    <ng-template #elseBlock>Ничего не найдено.</ng-template>
+    <div *ngIf="isLoading; else projectsList">
+      <p-progressSpinner />
+    </div>
+
+    <ng-template #projectsList>
+      <p-menu *ngIf="projects.length > 0; else noProjects" [model]="projects">
+        <ng-template #item let-item>
+          <a [routerLink]="['/project', item.id]" class="p-menu-item-link">
+            {{ item.label }}
+          </a>
+        </ng-template>
+      </p-menu>
+
+      <ng-template #noProjects>Ничего не найдено.</ng-template>
+    </ng-template>
 
     <a routerLink="/project/add" class="p-button ml-auto">
       Добавить проект

@@ -1,4 +1,8 @@
 <app-layout title="Карточка проекта">
+  <div *ngIf="isLoading">
+    <p-progressSpinner />
+  </div>
+
   <app-project-form
     *ngIf="hasProjects()"
     [project]="project"
