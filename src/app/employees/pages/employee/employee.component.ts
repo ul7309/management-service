@@ -22,17 +22,18 @@ export class EmployeeComponent implements OnInit {
   formMode: FormMode = FormMode.View;
   employee: Employee = {} as Employee;
   isLoading = false;
+  employeeId: string | null = null;
 
   constructor(
     private employeesService: EmployeesService,
     private activateRoute: ActivatedRoute
   ) {
+    this.employeeId = this.activateRoute.snapshot.params["id"];
   }
 
   ngOnInit(): void {
     this.isLoading = true;
-    const employeeId = this.activateRoute.snapshot.params["id"];
-    this.employeesService.getEmployee(employeeId).subscribe((data: Employee) => {
+    this.employeesService.getEmployee(this.employeeId).subscribe((data: Employee) => {
       this.employee = data;
       this.isLoading = false;
     });
@@ -44,5 +45,17 @@ export class EmployeeComponent implements OnInit {
 
   hasEmployee(): boolean {
     return !this.isLoading && Object.keys(this.employee).length > 0;
+  }
+
+  update(employee: Employee): void {
+    this.isLoading = true;
+    this.employeesService.updateEmployee(employee, this.employeeId).subscribe({
+      next: (updatedEmployee: Employee) => {
+        this.employee = updatedEmployee;
+      },
+      complete: () => {
+        this.isLoading = false;
+      }
+    });
   }
 }

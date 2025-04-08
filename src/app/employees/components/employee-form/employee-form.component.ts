@@ -5,7 +5,6 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angula
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextComponent } from '@shared/components/UI/input-text/input-text.component';
-import { ProjectFormComponent } from '../../../projects/components/project-form/project-form.component';
 
 import { Employee } from '../../models/employee.interface';
 import { FormField } from '@shared/models/form-field.interface';
@@ -13,7 +12,7 @@ import { FormMode } from '@shared/models/form-mode.enum';
 
 @Component({
   selector: 'app-employee-form',
-  imports: [ReactiveFormsModule, CommonModule, ButtonModule, DialogModule, InputTextComponent, ProjectFormComponent],
+  imports: [ReactiveFormsModule, CommonModule, ButtonModule, DialogModule, InputTextComponent],
   templateUrl: './employee-form.component.html',
   styleUrl: './employee-form.component.scss'
 })
@@ -22,12 +21,11 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   @Input() employee: Employee = {} as Employee;
   @Input() mode: FormMode = FormMode.Create;
   @Input() isLoading = false;
-  @Output() modeChange = new EventEmitter<FormMode>();
-  @Output() formData = new EventEmitter<Employee>();
 
-  visible = false;
+  @Output() modeChange = new EventEmitter<FormMode>();
+  @Output() emitSubmit = new EventEmitter<Employee>();
+
   myForm: FormGroup;
-  FormMode = FormMode;
   fields: FormField[] = [
     { key: 'label', label: 'ФИО', validators: [Validators.required], required: true },
     { key: 'departmentId', label: 'Отдел', validators: [Validators.required], required: true },
@@ -39,7 +37,7 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     { key: 'specialization', label: 'Специализация', validators: [Validators.required], required: true },
     { key: 'coverLetter', label: 'Сопроводительное письмо', validators: [Validators.required], required: true },
     { key: 'supervisor', label: 'Руководитель', validators: [Validators.required], required: true },
-    //{ key: 'project', label: 'Проект', validators: [Validators.required], required: false },
+    { key: 'project', label: 'Проект', validators: [Validators.required], required: false },
   ];
 
   constructor() {
@@ -73,6 +71,14 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     return this.mode === FormMode.Edit || this.mode === FormMode.Create
   }
 
+  isViewMode(): boolean {
+    return this.mode === FormMode.View;
+  }
+
+  isEditMode(): boolean {
+    return this.mode === FormMode.Edit;
+  }
+
   populateForm(employee: Employee): void {
     Object.keys(this.myForm.controls).forEach(key => {
         const employeeKey = key as keyof Employee; 
@@ -88,24 +94,12 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     }
   }
 
-  setMode(newMode: FormMode) {
-    if (this.mode !== newMode) {
-      this.mode = newMode;
-      this.updateFormState();
-      this.modeChange.emit(this.mode);
-    }
-  }
-
   change() {
-    this.setMode(FormMode.Edit);
+    this.modeChange.emit(FormMode.Edit);
   }
 
   submit() {
-    this.setMode(FormMode.View);
-    this.formData.emit(this.employee);
-  }
-
-  showDialog() {
-    this.visible = true;
+    this.modeChange.emit(FormMode.View);
+    this.emitSubmit.emit(this.employee);
   }
 }

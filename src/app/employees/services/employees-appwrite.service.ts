@@ -24,12 +24,13 @@ export class EmployeeAppwriteService {
       education: doc['education'],
       englishLevel: doc['englishLevel'],
       grade: doc['grade'],
-      id: doc['$id'],
+      id: doc['id'],
       label: doc['label'],
       location: doc['location'],
       mainInformation: doc['mainInformation'],
       specialization: doc['specialization'],
-      supervisor: doc['supervisor']
+      supervisor: doc['supervisor'],
+      project: doc['project'],
     };
   }
 
@@ -50,6 +51,10 @@ export class EmployeeAppwriteService {
   }
 
   createEmployee(employee: Employee): Observable<Models.Document> {
-    return from(this.appwriteService.db.createDocument(APPWRITE_DB_ID, APPWRITE_EMPLOYEES_ID, uuidv4(), employee))
+    return from(this.appwriteService.db.createDocument(APPWRITE_DB_ID, APPWRITE_EMPLOYEES_ID, uuidv4(), employee));
+  }
+
+  updateEmployee(employee: Employee, employeeId: string): Observable<Models.Document> {
+    return from(this.appwriteService.db.updateDocument(APPWRITE_DB_ID, APPWRITE_EMPLOYEES_ID, employeeId, employee));
   }
 }

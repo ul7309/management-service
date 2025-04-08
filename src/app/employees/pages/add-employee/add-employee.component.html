@@ -1,3 +1,7 @@
 <app-layout title="Добавить сотрудника">
-  <app-employee-form [mode]="formMode" [isLoading]="isLoading" (formData)="create($event)" />
+  <app-employee-form
+    [mode]="formMode"
+    [isLoading]="isLoading"
+    (emitSubmit)="create($event)"
+  />
 </app-layout>

@@ -1,6 +1,6 @@
 <form [formGroup]="myForm" novalidate (ngSubmit)="submit()">
   <div class="grid grid-cols-2 gap-4">
-    <div *ngFor="let field of fields">
+    <ng-container *ngFor="let field of fields">
       <app-input-text
         [key]="field.key"
         [label]="field.label"
@@ -8,22 +8,12 @@
         [error]="hasError(field.key)"
         formControlName="{{field.key}}"
       />
-
-      <div *ngIf="field.key === 'project' && mode === FormMode.Create" class="mt-4">
-        <p-button (click)="showDialog()" label="Добавить проект" />
-        <p-dialog header="Добавить проект" [modal]="true" [(visible)]="visible" [style]="{ width: '50vw' }">
-          <app-project-form
-            [mode]="mode"
-            (modeChange)="change()"
-          />
-        </p-dialog>
-      </div>
-    </div>
+    </ng-container>
   </div>
 
   <div class="mt-4">
     <p-button *ngIf="isVisibleSaveBtn()" [disabled]="myForm.invalid" (click)="submit()" [loading]="isLoading">Сохранить</p-button>
-    <p-button *ngIf="mode === FormMode.View" (click)="change()">Изменить</p-button>
-    <p-button *ngIf="mode === FormMode.Edit"severity="danger" class="ml-4">Удалить</p-button>
+    <p-button *ngIf="isViewMode()" (click)="change()">Изменить</p-button>
+    <p-button *ngIf="isEditMode()" severity="danger" class="ml-4">Удалить</p-button>
   </div>
 </form>
