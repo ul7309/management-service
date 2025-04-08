@@ -30,7 +30,8 @@ export class EmployeeAppwriteService {
       mainInformation: doc['mainInformation'],
       specialization: doc['specialization'],
       supervisor: doc['supervisor'],
-      project: doc['project'],
+      /* TODO */
+      //project: doc['project'],
     };
   }
 

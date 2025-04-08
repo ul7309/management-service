@@ -1,6 +1,6 @@
 <form [formGroup]="myForm" novalidate (ngSubmit)="submit()">
   <div class="grid grid-cols-2 gap-4">
-    <ng-container *ngFor="let field of fields">
+    <ng-container *ngFor="let field of employeeFields">
       <app-input-text
         [key]="field.key"
         [label]="field.label"
@@ -9,6 +9,46 @@
         formControlName="{{field.key}}"
       />
     </ng-container>
+
+    <div class="flex flex-col gap-4">
+      <span class="font-bold">Проект</span>
+
+      <ng-container *ngFor="let field of projectFields">
+        <app-input-text
+          [key]="field.key"
+          [label]="field.label"
+          [required]="field.required"
+          [error]="hasError(field.key)"
+          formControlName="{{field.key}}"
+        />
+      </ng-container>
+    </div>
+    <div class="flex flex-col gap-4">
+      <span class="font-bold">Участие в проектах</span>
+
+      <div class="flex gap-4">
+        <ng-container *ngFor="let field of participationProjectFields">
+          <app-input-text
+            *ngIf="field.key === 'name'"
+            [key]="field.key"
+            [label]="field.label"
+            [required]="field.required"
+            [error]="hasError(field.key)"
+            [formControlName]="field.key"
+          />
+  
+          <div *ngIf="field.key === 'date'" class="flex flex-col">
+            <label [for]="field.key">{{ field.label }} <span *ngIf="field.required" class="text-red-600">*</span></label>
+            <p-datepicker
+              [formControlName]="field.key"
+              [showIcon]="true"
+              selectionMode="range"
+              [readonlyInput]="true"
+            />
+          </div>
+        </ng-container>
+      </div>
+    </div>
   </div>
 
   <div class="mt-4">

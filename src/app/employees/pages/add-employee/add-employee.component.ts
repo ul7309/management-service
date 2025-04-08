@@ -7,6 +7,9 @@ import { FormMode } from '@shared/models/form-mode.enum';
 import { EmployeesService } from '../../services/employees-data.service';
 import { Employee } from '../../models/employee.interface';
 
+import { Project } from '../../../projects/models/projects.interface';
+import { ParticipationProject } from '@shared/models/participation-project';
+
 @Component({
   selector: 'app-add-employee',
   imports: [LayoutComponent, EmployeeFormComponent],
@@ -20,7 +23,7 @@ export class AddEmployeeComponent {
 
   constructor(private employeesService: EmployeesService) {}
 
-  create(employee: Employee): void {
+  create({ employee, project, participationProject }: { employee: Employee; project: Project; participationProject: ParticipationProject }): void {
     this.isLoading = true;
     this.employeesService.createEmployee(employee).subscribe({
       next: () => {
@@ -30,5 +33,7 @@ export class AddEmployeeComponent {
         this.isLoading = false;
       }
     });
+
+    console.log(project, participationProject);
   }
 }

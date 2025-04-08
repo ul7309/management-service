@@ -8,7 +8,11 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { EmployeesService } from '../../services/employees-data.service';
 import { Employee } from '../../models/employee.interface';
+
+import { Project } from '../../../projects/models/projects.interface';
+
 import { FormMode } from '@shared/models/form-mode.enum';
+import { ParticipationProject } from '@shared/models/participation-project';
 
 @Component({
   selector: 'app-employee',
@@ -47,7 +51,7 @@ export class EmployeeComponent implements OnInit {
     return !this.isLoading && Object.keys(this.employee).length > 0;
   }
 
-  update(employee: Employee): void {
+  update({ employee, project, participationProject }: { employee: Employee; project: Project; participationProject: ParticipationProject }): void {
     this.isLoading = true;
     this.employeesService.updateEmployee(employee, this.employeeId).subscribe({
       next: (updatedEmployee: Employee) => {
@@ -57,5 +61,7 @@ export class EmployeeComponent implements OnInit {
         this.isLoading = false;
       }
     });
+
+    console.log(project, participationProject);
   }
 }
