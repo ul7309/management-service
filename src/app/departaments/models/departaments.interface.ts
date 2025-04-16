@@ -1,6 +1,6 @@
 import { Employee } from '../../employees/models/employee.interface';
 
-export type DepartamentEmployee = Pick<Employee, 'id' | 'label' | 'departmentId'>
+export type DepartamentEmployee = Pick<Employee, 'id' | 'fio' | 'departmentId'>
 
 export interface Departament {
   id: string;

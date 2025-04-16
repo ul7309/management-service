@@ -2,7 +2,7 @@
   <p-button
     *ngIf="departament.supervisor"
     [routerLink]="['/employee', departament.supervisor.id]"
-    [label]="departament.supervisor.label"
+    [label]="departament.supervisor.fio"
     [link]="true"
   />
 
