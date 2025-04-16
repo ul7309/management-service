@@ -4,7 +4,7 @@
       *ngFor="let field of fields"
       [key]="field.key"
       [label]="field.label"
-      [required]="field.required"
+      [required]="field?.required || false"
       [error]="hasError(field.key)"
       formControlName="{{field.key}}"
     />

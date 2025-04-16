@@ -1,7 +1,7 @@
 export interface Project {
   id: string;
-  label: string;
-  label_nda: string;
+  name: string;
+  name_nda: string;
   description: string;
   direction: string;
   goal: string;
@@ -9,4 +9,4 @@ export interface Project {
   customer: string;
 };
 
-export type Projects = Pick<Project, 'id' | 'label'>
+export type Projects = Pick<Project, 'id' | 'name'>

@@ -20,8 +20,8 @@ export class ProjectsAppwriteService {
   mapDocumentToProject(doc: Models.Document): Project {
     return {
       id: doc['$id'],
-      label: doc['label'],
-      label_nda: doc['label_nda'],
+      name: doc['name'],
+      name_nda: doc['name_nda'],
       description: doc['description'],
       direction: doc['direction'],
       goal: doc['goal'],
