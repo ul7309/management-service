@@ -18,7 +18,7 @@
           <ng-container *ngFor="let nestedField of field.fields">
             <ng-container *ngIf="nestedField.key !== 'date'; else dateField">
               <app-input-text
-                [key]="nestedField.key"
+                [key]="field.key + '_' + nestedField.key"
                 [label]="nestedField.label"
                 [required]="nestedField?.required || false"
                 [error]="hasError(field.key + '.' + nestedField.key)"
@@ -28,11 +28,12 @@
 
             <ng-template #dateField>
               <div class="flex flex-col">
-                <label [for]="field.key + '.' + nestedField.key">
+                <label [for]="field.key + '_' + nestedField.key">
                   {{ nestedField.label }} 
                   <span *ngIf="nestedField.required" class="text-red-600">*</span>
                 </label>
                 <p-datepicker
+                  [inputId]="field.key + '_' + nestedField.key"
                   [formControlName]="nestedField.key"
                   [showIcon]="true"
                   selectionMode="range"

@@ -30,7 +30,6 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   @Output() emitSubmit = new EventEmitter<{ employee: Employee; project: Project; participationProject: ParticipationProject }>();
 
   myForm: FormGroup;
-
   employeeFields: FormField[] = [
     { key: 'fio', label: 'ФИО', validators: [Validators.required], required: true },
     { key: 'departmentId', label: 'Отдел', validators: [Validators.required], required: true },
@@ -103,7 +102,13 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
         const nestedGroup = formGroup.get(field.key) as FormGroup;
         this.populateForm(data[field.key as keyof T] || {}, nestedGroup, field.fields);
       } else if (data[field.key as keyof T] !== undefined) {
-        formGroup.get(field.key)?.setValue(data[field.key as keyof T]);
+        if (field.key === 'date' && Array.isArray(data[field.key as keyof T])) {
+          const dateValues = data[field.key as keyof T] as unknown as string[];
+          const dates = dateValues.map(d => new Date(d));
+          formGroup.get(field.key)?.setValue(dates);
+        } else {
+          formGroup.get(field.key)?.setValue(data[field.key as keyof T]);
+        }
       }
     });
   }
