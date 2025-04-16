@@ -8,7 +8,7 @@
       <p-menu *ngIf="employees.length > 0; else elseBlock" [model]="employees">
         <ng-template #item let-item>
           <a [routerLink]="['/employee', item.id]" class="p-menu-item-link">
-            {{ item.label }}
+            {{ item.fio }}
           </a>
         </ng-template>
       </p-menu>

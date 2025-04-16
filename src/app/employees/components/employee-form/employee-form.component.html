@@ -1,54 +1,49 @@
 <form [formGroup]="myForm" novalidate (ngSubmit)="submit()">
   <div class="grid grid-cols-2 gap-4">
     <ng-container *ngFor="let field of employeeFields">
-      <app-input-text
-        [key]="field.key"
-        [label]="field.label"
-        [required]="field.required"
-        [error]="hasError(field.key)"
-        formControlName="{{field.key}}"
-      />
-    </ng-container>
-
-    <div class="flex flex-col gap-4">
-      <span class="font-bold">Проект</span>
-
-      <ng-container *ngFor="let field of projectFields">
+      <ng-container *ngIf="!field.isGroup; else groupField">
         <app-input-text
           [key]="field.key"
           [label]="field.label"
-          [required]="field.required"
+          [required]="field?.required || false"
           [error]="hasError(field.key)"
           formControlName="{{field.key}}"
         />
       </ng-container>
-    </div>
-    <div class="flex flex-col gap-4">
-      <span class="font-bold">Участие в проектах</span>
 
-      <div class="flex gap-4">
-        <ng-container *ngFor="let field of participationProjectFields">
-          <app-input-text
-            *ngIf="field.key === 'name'"
-            [key]="field.key"
-            [label]="field.label"
-            [required]="field.required"
-            [error]="hasError(field.key)"
-            [formControlName]="field.key"
-          />
-  
-          <div *ngIf="field.key === 'date'" class="flex flex-col">
-            <label [for]="field.key">{{ field.label }} <span *ngIf="field.required" class="text-red-600">*</span></label>
-            <p-datepicker
-              [formControlName]="field.key"
-              [showIcon]="true"
-              selectionMode="range"
-              [readonlyInput]="true"
-            />
-          </div>
-        </ng-container>
-      </div>
-    </div>
+      <ng-template #groupField>
+        <div [formGroupName]="field.key" class="flex flex-col gap-4">
+          <span class="font-bold">{{field.label}}</span>
+
+          <ng-container *ngFor="let nestedField of field.fields">
+            <ng-container *ngIf="nestedField.key !== 'date'; else dateField">
+              <app-input-text
+                [key]="nestedField.key"
+                [label]="nestedField.label"
+                [required]="nestedField?.required || false"
+                [error]="hasError(field.key + '.' + nestedField.key)"
+                formControlName="{{nestedField.key}}"
+              />
+            </ng-container>
+
+            <ng-template #dateField>
+              <div class="flex flex-col">
+                <label [for]="field.key + '.' + nestedField.key">
+                  {{ nestedField.label }} 
+                  <span *ngIf="nestedField.required" class="text-red-600">*</span>
+                </label>
+                <p-datepicker
+                  [formControlName]="nestedField.key"
+                  [showIcon]="true"
+                  selectionMode="range"
+                  [readonlyInput]="true"
+                />
+              </div>
+            </ng-template>
+          </ng-container>
+        </div>
+      </ng-template>
+    </ng-container>
   </div>
 
   <div class="mt-4">

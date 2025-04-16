@@ -8,6 +8,8 @@ import { ValidatorFn } from '@angular/forms';
 export interface FormField {
   key: string;
   label: string;
-  validators: ValidatorFn[];
-  required: boolean;
-};
+  validators?: ValidatorFn[];
+  required?: boolean;
+  isGroup?: boolean;
+  fields?: FormField[];
+}

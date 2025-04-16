@@ -24,14 +24,14 @@ export class EmployeeAppwriteService {
       education: doc['education'],
       englishLevel: doc['englishLevel'],
       grade: doc['grade'],
-      id: doc['id'],
-      label: doc['label'],
+      id: doc['$id'],
+      fio: doc['fio'],
       location: doc['location'],
       mainInformation: doc['mainInformation'],
       specialization: doc['specialization'],
       supervisor: doc['supervisor'],
-      /* TODO */
-      //project: doc['project'],
+      project: doc['project'],
+      participationProject: doc['participationProject'],
     };
   }
 

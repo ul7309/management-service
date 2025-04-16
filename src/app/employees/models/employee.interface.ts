@@ -1,6 +1,9 @@
+import { Project } from "../../projects/models/projects.interface";
+import { ParticipationProject } from '@shared/models/participation-project';
+
 export interface Employee {
   id: string;
-  label: string;
+  fio: string;
   departmentId: string;
   mainInformation: string;
   education: string;
@@ -10,4 +13,6 @@ export interface Employee {
   specialization: string;
   coverLetter: string;
   supervisor: string;
+  project: Project;
+  participationProject?: ParticipationProject;
 };

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
@@ -16,11 +16,11 @@ import { ParticipationProject } from '@shared/models/participation-project';
 
 @Component({
   selector: 'app-employee-form',
+  standalone: true,
   imports: [ReactiveFormsModule, CommonModule, ButtonModule, DialogModule, DatePickerModule, InputTextComponent],
   templateUrl: './employee-form.component.html',
   styleUrl: './employee-form.component.scss'
 })
-
 export class EmployeeFormComponent implements OnInit, OnChanges {
   @Input() employee: Employee = {} as Employee;
   @Input() mode: FormMode = FormMode.Create;
@@ -30,11 +30,9 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   @Output() emitSubmit = new EventEmitter<{ employee: Employee; project: Project; participationProject: ParticipationProject }>();
 
   myForm: FormGroup;
-  project: Project = {} as Project;
-  participationProject: ParticipationProject = {} as ParticipationProject;
 
   employeeFields: FormField[] = [
-    { key: 'label', label: 'ФИО', validators: [Validators.required], required: true },
+    { key: 'fio', label: 'ФИО', validators: [Validators.required], required: true },
     { key: 'departmentId', label: 'Отдел', validators: [Validators.required], required: true },
     { key: 'mainInformation', label: 'Главная информация', validators: [Validators.required], required: true },
     { key: 'education', label: 'Образование', validators: [Validators.required], required: true },
@@ -44,61 +42,88 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
     { key: 'specialization', label: 'Специализация', validators: [Validators.required], required: true },
     { key: 'coverLetter', label: 'Сопроводительное письмо', validators: [Validators.required], required: true },
     { key: 'supervisor', label: 'Руководитель', validators: [Validators.required], required: true },
-  ];
-
-  participationProjectFields: FormField[] = [
-    { key: 'name', label: 'Название', validators: [Validators.required], required: true },
-    { key: 'date', label: 'Дата', validators: [Validators.required], required: true },
-  ];
-
-  projectFields: FormField[] = [
-    { key: 'label', label: 'Название проекта', validators: [Validators.required], required: true },
-    { key: 'label_nda', label: 'Название под NDA', validators: [Validators.required], required: true },
-    { key: 'description', label: 'Описание', validators: [Validators.required], required: true },
-    { key: 'direction', label: 'Сфера', validators: [Validators.required], required: true },
-    { key: 'goal', label: 'Цель проекта', validators: [Validators.required], required: true },
-    { key: 'functionality', label: 'Функциональность', validators: [Validators.required], required: true },
-    { key: 'customer', label: 'Заказчик', validators: [Validators.required], required: true },
+    { 
+      key: 'project', 
+      label: 'Проект', 
+      isGroup: true,
+      fields: [
+        { key: 'name', label: 'Название проекта', validators: [Validators.required], required: true },
+        { key: 'name_nda', label: 'Название под NDA', validators: [Validators.required], required: true },
+        { key: 'description', label: 'Описание', validators: [Validators.required], required: true },
+        { key: 'direction', label: 'Сфера', validators: [Validators.required], required: true },
+        { key: 'goal', label: 'Цель проекта', validators: [Validators.required], required: true },
+        { key: 'functionality', label: 'Функциональность', validators: [Validators.required], required: true },
+        { key: 'customer', label: 'Заказчик', validators: [Validators.required], required: true },
+      ]
+    },
+    { 
+      key: 'participationProject', 
+      label: 'Участие в проектах', 
+      isGroup: true,
+      fields: [
+        { key: 'name', label: 'Название', validators: [Validators.required], required: true },
+        { key: 'date', label: 'Дата', validators: [Validators.required], required: true },
+      ]
+    }
   ];
 
   constructor() {
     this.myForm = new FormGroup({});
-
-    this.employeeFields.forEach(field => {
-      const isDisabled = this.mode === FormMode.View;
-      this.myForm.addControl(field.key, new FormControl({value: '', disabled: isDisabled}, field.validators));
-    });
-
-    this.participationProjectFields.forEach(field => {
-      const isDisabled = this.mode === FormMode.View;
-      this.myForm.addControl(field.key, new FormControl({value: '', disabled: isDisabled}, field.validators));
-    });
-
-    this.projectFields.forEach(field => {
-      const isDisabled = this.mode === FormMode.View;
-      this.myForm.addControl(field.key, new FormControl({value: '', disabled: isDisabled}, field.validators));
-    });
+    this.createFormControls(this.employeeFields, this.myForm);
   }
 
   ngOnInit(): void {
-    this.populateForm(this.employee);
-
-    this.myForm.valueChanges.subscribe(values => {
-      this.employee = { ...this.employee, ...values };
-    });
+    this.populateForm<Employee>(this.employee, this.myForm, this.employeeFields);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['mode']) this.updateFormState();
   }
 
+  private createFormControls(fields: FormField[], formGroup: FormGroup): void {
+    fields.forEach(field => {
+      const isDisabled = this.mode === FormMode.View;
+      
+      if (field.isGroup && field.fields) {
+        const nestedGroup = new FormGroup({});
+        this.createFormControls(field.fields, nestedGroup);
+        formGroup.addControl(field.key, nestedGroup);
+      } else {
+        formGroup.addControl(
+          field.key, 
+          new FormControl({value: '', disabled: isDisabled}, field.validators)
+        );
+      }
+    });
+  }
+
+  private populateForm<T>(data: T, formGroup: FormGroup, fields: FormField[]): void {
+    fields.forEach(field => {
+      if (field.isGroup && field.fields) {
+        const nestedGroup = formGroup.get(field.key) as FormGroup;
+        this.populateForm(data[field.key as keyof T] || {}, nestedGroup, field.fields);
+      } else if (data[field.key as keyof T] !== undefined) {
+        formGroup.get(field.key)?.setValue(data[field.key as keyof T]);
+      }
+    });
+  }
+
   hasError(controlName: string): boolean {
-    const control = this.myForm.controls[controlName];
-    return control.invalid && control.touched;
+    const control = this.getControl(controlName);
+    return control?.invalid && control?.touched || false;
+  }
+
+  private getControl(controlName: string): AbstractControl | null {
+    if (controlName.includes('.')) {
+      const [parent, child] = controlName.split('.');
+      return this.myForm.get(parent)?.get(child) || null;
+    }
+
+    return this.myForm.get(controlName);
   }
 
   isVisibleSaveBtn(): boolean {
-    return this.mode === FormMode.Edit || this.mode === FormMode.Create
+    return this.mode === FormMode.Edit || this.mode === FormMode.Create;
   }
 
   isViewMode(): boolean {
@@ -107,17 +132,6 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
 
   isEditMode(): boolean {
     return this.mode === FormMode.Edit;
-  }
-
-  populateForm(employee: Employee): void {
-    Object.keys(this.myForm.controls).forEach(key => {
-      if (this.employeeFields.some(f => f.key === key)) {
-        const employeeKey = key as keyof Employee;
-        if (employee[employeeKey] !== undefined) {
-          this.myForm.controls[key].setValue(employee[employeeKey]);
-        }
-      }
-    });
   }
 
   updateFormState(): void {
@@ -135,18 +149,11 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
   submit() {
     this.modeChange.emit(FormMode.View);
 
-    const employeeData: Employee = { ...this.employee, ...this.myForm.value };
-    const projectData: Project = {} as Project;
-    const participationProjectData: ParticipationProject = {} as ParticipationProject;
-
-    this.projectFields.forEach(field => {
-      projectData[field.key as keyof Project] = this.myForm.value[field.key];
+    const formValue = this.myForm.value;
+    this.emitSubmit.emit({
+      employee: formValue,
+      project: formValue.project,
+      participationProject: formValue.participationProject
     });
-
-    this.participationProjectFields.forEach(field => {
-      participationProjectData[field.key as keyof ParticipationProject] = this.myForm.value[field.key];
-    });
-
-    this.emitSubmit.emit({ employee: employeeData, project: projectData, participationProject: participationProjectData });
   }
 }
