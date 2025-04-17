@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { DatePickerModule } from 'primeng/datepicker';
 import { InputTextComponent } from '@shared/components/UI/input-text/input-text.component';
+import { DatepickerComponent } from '@shared/components/UI/datepicker/datepicker.component';
 
 import { Employee } from '../../models/employee.interface';
 import { FormField } from '@shared/models/form-field.interface';
@@ -17,7 +18,7 @@ import { ParticipationProject } from '@shared/models/participation-project';
 @Component({
   selector: 'app-employee-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, ButtonModule, DialogModule, DatePickerModule, InputTextComponent],
+  imports: [ReactiveFormsModule, CommonModule, ButtonModule, DialogModule, DatePickerModule, InputTextComponent, DatepickerComponent],
   templateUrl: './employee-form.component.html',
   styleUrl: './employee-form.component.scss'
 })
@@ -111,6 +112,14 @@ export class EmployeeFormComponent implements OnInit, OnChanges {
         }
       }
     });
+  }
+
+  getNestedControl(parentKey: string, childKey: string): FormControl {
+    const control = this.myForm.get(parentKey)?.get(childKey);
+    if (!control) {
+      throw new Error(`Control ${parentKey}.${childKey} not found`);
+    }
+    return control as FormControl;
   }
 
   hasError(controlName: string): boolean {
